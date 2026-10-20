@@ -1,1 +1,146 @@
+/* Reset & Base Setup */ 
 
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+background-color: #0b0d10; /* Void Black */
+color: #e2e8f0;
+font-family: 'Georgia', serif;
+line-height: 1.6;
+} 
+
+.container {
+max-width: 1100px;
+margin: 0 auto;
+padding: 40px 20px;
+} 
+
+/* Typography Details */
+.hero {
+text-align: center;
+background: radial-gradient(circle, #1a1423 0%, #0b0d10 100%);
+padding: 100px 20px;
+border-bottom: 1px solid #d4af37;
+} 
+
+.book-title {
+font-size: 3.5rem;
+color: #f7e7ce;
+letter-spacing: 3px;
+} 
+
+.book-title span {
+font-size: 2rem;
+font-style: italic;
+color: #d4af37; /* Metallic Gold */
+} 
+
+.tagline {
+margin: 20px 0;
+font-style: italic;
+color: #94a3b8;
+} 
+
+/* Button & Filter Menu Styles */
+.btn {
+padding: 12px 24px;
+font-size: 1rem;
+cursor: pointer;
+border: none;
+margin: 5px;
+transition: 0.3s ease;
+} 
+
+.btn.primary {
+background-color: #d4af37;
+color: #0b0d10;
+font-weight: bold;
+} 
+
+.btn.secondary {
+background-color: transparent;
+color: #d4af37;
+border: 1px solid #d4af37;
+} 
+
+.filter-controls {
+display: flex;
+justify-content: center;
+gap: 15px;
+margin: 30px 0;
+flex-wrap: wrap;
+} 
+
+.filter-btn {
+background: #1e293b;
+border: 1px solid #475569;
+color: #94a3b8;
+padding: 10px 20px;
+cursor: pointer;
+font-family: inherit;
+border-radius: 4px;
+transition: all 0.3s ease;
+} 
+
+.filter-btn.active, .filter-btn:hover {
+border-color: #d4af37;
+color: #f7e7ce;
+box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+} 
+
+/* Magic Card Grid Layout */
+.grid-layout {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+gap: 25px;
+margin-top: 20px;
+} 
+
+/* Lore Cards */
+.lore-card {
+background: #131720;
+border: 1px solid #2e3748;
+border-radius: 6px;
+padding: 24px;
+transition: transform 0.3s ease, border-color 0.3s ease;
+} 
+
+.lore-card:hover {
+transform: translateY(-5px);
+border-color: #d4af37;
+} 
+
+.lore-card h3 {
+color: #f7e7ce;
+margin-bottom: 8px;
+font-size: 1.4rem;
+} 
+
+/* Magical Badge Indicators */
+.element-badge {
+display: inline-block;
+padding: 3px 10px;
+font-size: 0.75rem;
+font-weight: bold;
+text-transform: uppercase;
+border-radius: 12px;
+margin-bottom: 15px;
+letter-spacing: 1px;
+} 
+
+.badge-air { background: #38bdf8; color: #0369a1; }
+.badge-earth { background: #15803d; color: #bbf7d0; }
+.badge-electricity { background: #eab308; color: #451a03; }
+.badge-fire { background: #b91c1c; color: #fee2e2; }
+.badge-ice { background: #99f6e4; color: #115e59; }
+.badge-magic { background: #c084fc; color: #3b0764; }
+.badge-water { background: #2563eb; color: #dbeafe; } 
+
+.lore-card p {
+font-size: 0.95rem;
+color: #cbd5e1;
+}
