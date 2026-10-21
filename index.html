@@ -9,6 +9,18 @@
 </head>
 <body>
 
+    <!-- Main Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="nav-logo">ECHOES OF THE ELEMENTS</span>
+            <div class="nav-links">
+                <a href="#lore">Lore Codex</a>
+                <a href="#translator">Electric Decoder</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
     <header class="hero">
         <div class="hero-content">
             <p class="subtitle">An Epic Elemental Fantasy Novel</p>
@@ -21,41 +33,50 @@
         </div>
     </header>
 
-    <main class="container">
+    <!-- Main Split-Column Container -->
+    <main class="page-layout" id="lore">
         
-        <section class="elements-section">
-            <h2>The Lore: Echoes of the Elements</h2>
-            <p class="instruction">Filter by element category to explore the histories and royal lineages:</p>
-            
-            <div class="filter-controls">
-                <button class="filter-btn active" data-filter="all">All Echoes</button>
-                <button class="filter-btn" data-filter="air">Air</button>
-                <button class="filter-btn" data-filter="earth">Earth</button>
-                <button class="filter-btn" data-filter="electricity">Electricity</button>
-                <button class="filter-btn" data-filter="fire">Fire</button>
-                <button class="filter-btn" data-filter="ice">Ice</button>
-                <button class="filter-btn" data-filter="magic">Magic</button>
-                <button class="filter-btn" data-filter="water">Water</button>
-            </div>
-
-            <div id="elements-grid" class="grid-layout"></div>
-        </section>
-        <!-- Interactive Code Translator Section -->
-        <section class="translator-section">
-            <h2>Electricity Codex: Code Translator</h2>
-            <p class="instruction">Type a word below to translate it into the thunder (-) and lightning (・) code:</p>
-            
-            <div class="translator-box">
-                <input type="text" id="codec-input" placeholder="Type secret message here...">
-                <div class="codec-output-container">
-                    <strong>Translated Transmission:</strong>
-                    <div id="codec-output">...</div>
+        <!-- Left Column: Filter Sidebar Controls -->
+        <aside class="sidebar">
+            <div class="sidebar-sticky">
+                <h3>Filter Codex</h3>
+                <p>Select a faction to view its lore, magical traits, and royal lineages:</p>
+                <div class="filter-controls">
+                    <button class="filter-btn active" data-filter="all">All Echoes</button>
+                    <button class="filter-btn" data-filter="air">Air</button>
+                    <button class="filter-btn" data-filter="earth">Earth</button>
+                    <button class="filter-btn" data-filter="electricity">Electricity</button>
+                    <button class="filter-btn" data-filter="fire">Fire</button>
+                    <button class="filter-btn" data-filter="ice">Ice</button>
+                    <button class="filter-btn" data-filter="magic">Magic</button>
+                    <button class="filter-btn" data-filter="water">Water</button>
                 </div>
             </div>
-        </section>
+        </aside>
+
+        <!-- Right Column: Interactive Content Displays -->
+        <div class="content-display">
+            <h2>The Elemental Archives</h2>
+            
+            <!-- Cards Grid Area -->
+            <div id="elements-grid" class="grid-layout"></div>
+
+            <!-- Secrets Decoder Module -->
+            <section class="translator-section" id="translator">
+                <h2>Electricity Codex: Transmission Decoder</h2>
+                <p>Type a secret message below to instantly convert it into the thunder (-) and lightning (・) code of the skies:</p>
+                
+                <div class="translator-box">
+                    <input type="text" id="codec-input" placeholder="Type message here...">
+                    <div class="codec-output-container">
+                        <strong>Translated Transmission:</strong>
+                        <div id="codec-output">...</div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
     </main>
 
 </body>
 </html>
-
