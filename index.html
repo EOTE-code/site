@@ -27,7 +27,8 @@
             <h1 class="book-title">ECHOES <br><span>of the</span> ELEMENTS</h1>
             <p class="tagline">"Everyone Can Hear Our Secrets."</p>
             <div class="cta-buttons">
-                <button class="btn primary">Read A Snippet</button>
+                <!-- Added an ID hook here to target via JavaScript -->
+                <button class="btn primary" id="open-snippet-btn">Read A Snippet</button>
                 <button class="btn secondary">Pre-Order Now</button>
             </div>
         </div>
@@ -77,6 +78,24 @@
         </div>
 
     </main>
+
+    <!-- CINEMATIC SNIPPET MODAL POPUP WINDOW -->
+    <div id="snippet-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-snippet-btn" class="modal-close">&times;</button>
+            <span class="modal-badge">Exclusive Preview</span>
+            <h2>Ember & Coral</h2>
+            <div class="story-text">
+                <p>Ember looked at Coral.</p>
+                <p>“I didn’t want to tell you until I sorted it all out.” Ember turned slightly.</p>
+                <p class="dialogue-pause">“...”</p>
+                <p>Coral held her spear close to Ember's chest.</p>
+                <p>“Coral please don't do this.” Ember's voice trembled.</p>
+                <p>“I’ll make you pay for what you did. I defended you! I cared for you! I even…” There was a pause. “I-I even trusted you! This is the only way it's going to be.”</p>
+                <p>Coral had tears forming in her eyes…</p>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
