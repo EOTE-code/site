@@ -1,7 +1,5 @@
-/* Import Google Fonts for Cinematic/Fantasy Style */
 @import url('https://googleapis.com');
 
-/* Core Master Alignment Reset */
 * {
     margin: 0;
     padding: 0;
@@ -13,23 +11,24 @@ html {
 }
 
 body {
-    background-color: #06080c; /* Deep Void Obsidian */
+    background-color: #06080c;
     color: #e2e8f0;
     font-family: 'Plus Jakarta Sans', sans-serif;
     line-height: 1.7;
-    padding-top: 80px; /* Spacing for bigger navbar */
+    padding-top: 80px;
     overflow-x: hidden;
+    width: 100%;
 }
 
-/* Premium Navigation Header */
+/* Floating Navigation Header */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 80px;
-    background: rgba(13, 17, 23, 0.9);
-    backdrop-filter: blur(12px); /* Glassmorphism effect */
+    background: rgba(13, 17, 23, 0.95);
+    backdrop-filter: blur(12px);
     border-bottom: 2px solid rgba(212, 175, 55, 0.2);
     display: flex;
     align-items: center;
@@ -40,7 +39,7 @@ body {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -49,243 +48,147 @@ body {
 .nav-logo {
     font-family: 'Cinzel', serif;
     font-weight: 900;
-    font-size: 1.3rem;
-    letter-spacing: 4px;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
     color: #d4af37;
-    text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
 .nav-links a {
     color: #94a3b8;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    font-weight: 700;
-    margin-left: 30px;
-    font-size: 1rem;
-    letter-spacing: 1px;
+    margin-left: 20px;
+    font-size: 0.9rem;
     transition: all 0.3s;
 }
 
-.nav-links a:hover {
-    color: #f7e7ce;
-    text-shadow: 0 0 10px rgba(247, 231, 206, 0.5);
-}
-
-/* Massive Cinematic Hero Layout Section */
+/* Cinematic Hero */
 .hero {
-    position: relative;
     text-align: center;
     background: radial-gradient(circle at center, #1b1227 0%, #06080c 80%);
-    padding: 160px 20px;
+    padding: 100px 20px;
     border-bottom: 2px solid #d4af37;
-    box-shadow: inset 0 -50px 100px rgba(0,0,0,0.8), 0 10px 50px rgba(212, 175, 55, 0.05);
 }
 
 .subtitle {
     font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    letter-spacing: 6px;
+    font-size: 1rem;
+    letter-spacing: 4px;
     color: #d4af37;
     text-transform: uppercase;
     margin-bottom: 15px;
-    font-weight: 700;
 }
 
 .book-title {
-    font-size: 5.5rem; /* Massive Heading Size */
+    font-size: 3.5rem;
     font-weight: 900;
     color: #f7e7ce;
-    letter-spacing: 8px;
+    letter-spacing: 4px;
     font-family: 'Cinzel', serif;
-    line-height: 1.1;
-    text-shadow: 0 0 30px rgba(247, 231, 206, 0.15);
+    line-height: 1.2;
 }
 
 .book-title span {
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: 'IM Fell English SC', serif;
-    font-style: italic;
     color: #d4af37;
-    display: inline-block;
-    margin: 0 10px;
 }
 
 .tagline {
-    margin: 35px auto;
+    margin: 25px auto;
     font-style: italic;
     color: #cbd5e1;
-    font-size: 1.4rem;
-    max-width: 700px;
-    font-family: 'Georgia', serif;
+    font-size: 1.2rem;
+    max-width: 600px;
 }
 
-/* CTA Alignment Buttons Row */
 .cta-buttons {
     display: flex;
     justify-content: center;
-    gap: 25px;
-    margin-top: 40px;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
 }
 
 .btn {
-    padding: 16px 40px;
-    font-size: 1.1rem;
+    padding: 14px 30px;
+    font-size: 1rem;
     font-family: 'Cinzel', serif;
-    letter-spacing: 2px;
     cursor: pointer;
     border: none;
     border-radius: 4px;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.3s ease;
     font-weight: bold;
 }
 
-.btn.primary {
-    background-color: #d4af37;
-    color: #06080c;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-}
+.btn.primary { background-color: #d4af37; color: #06080c; }
+.btn.secondary { background-color: transparent; color: #d4af37; border: 2px solid #d4af37; }
 
-.btn.secondary {
-    background-color: transparent;
-    color: #d4af37;
-    border: 2px solid #d4af37;
-}
-
-.btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
-    letter-spacing: 3px;
-}
-
-/* Two-Column Screen Layout */
+/* Structural Content Split Grid */
 .page-layout {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 100px 40px;
+    padding: 60px 20px;
     display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 60px;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
 }
 
-/* Asymmetric Sidebar Interface */
-.sidebar-sticky {
-    position: sticky;
-    top: 130px;
-}
+.sidebar-sticky { position: sticky; top: 110px; }
+.sidebar h3 { font-family: 'Cinzel', serif; color: #f7e7ce; margin-bottom: 10px; font-size: 1.6rem; }
+.sidebar p { font-size: 0.95rem; color: #94a3b8; margin-bottom: 25px; }
 
-.sidebar h3 {
-    font-family: 'Cinzel', serif;
-    color: #f7e7ce;
-    margin-bottom: 15px;
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-}
-
-.sidebar p {
-    font-size: 1rem;
-    color: #94a3b8;
-    margin-bottom: 35px;
-}
-
-.filter-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
+.filter-controls { display: flex; flex-direction: column; gap: 10px; }
 .filter-btn {
     width: 100%;
     text-align: left;
     background: #11151d;
     border: 1px solid #1f293d;
     color: #94a3b8;
-    padding: 16px 20px;
+    padding: 14px 18px;
     cursor: pointer;
     font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
     border-radius: 6px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
+.filter-btn.active, .filter-btn:hover { border-color: #d4af37; color: #f7e7ce; background: #18202c; }
 
-.filter-btn.active, .filter-btn:hover {
-    border-color: #d4af37;
-    color: #f7e7ce;
-    background: #18202c;
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
-    padding-left: 26px; /* Elegant shift right when hovered */
-}
-
-/* Content Area Title */
 .content-display h2 {
     font-family: 'Cinzel', serif;
     color: #f7e7ce;
-    font-size: 2.5rem;
-    margin-bottom: 40px;
+    font-size: 2rem;
+    margin-bottom: 30px;
     border-bottom: 2px solid rgba(31, 41, 61, 0.5);
-    padding-bottom: 20px;
-    letter-spacing: 2px;
+    padding-bottom: 15px;
 }
 
-/* Adaptive Three-Column Cards Matrix Grid */
 .grid-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
 }
 
-/* Massive Magical Lore Cards Styling */
 .lore-card {
     background: #11151d;
     border: 1px solid rgba(31, 41, 61, 0.8);
     border-radius: 8px;
-    padding: 30px;
+    padding: 25px;
     display: flex;
     flex-direction: column;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.lore-card h3 {
-    font-family: 'Cinzel', serif;
-    color: #f7e7ce;
-    margin-bottom: 12px;
-    font-size: 1.5rem;
-    letter-spacing: 1px;
-}
+.lore-card h3 { font-family: 'Cinzel', serif; color: #f7e7ce; margin-bottom: 10px; font-size: 1.3rem; }
+.lore-card p { font-size: 1rem; color: #cbd5e1; }
 
-.lore-card p {
-    font-size: 1.05rem;
-    color: #cbd5e1;
-}
-
-/* Individual Custom Element Hover Glow Filters */
-.lore-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-}
-
-.lore-card:has(.badge-air):hover { border-color: #38bdf8; box-shadow: 0 0 25px rgba(56, 189, 248, 0.15); }
-.lore-card:has(.badge-earth):hover { border-color: #10b981; box-shadow: 0 0 25px rgba(16, 185, 129, 0.15); }
-.lore-card:has(.badge-electricity):hover { border-color: #f59e0b; box-shadow: 0 0 25px rgba(245, 158, 11, 0.2); }
-.lore-card:has(.badge-fire):hover { border-color: #ef4444; box-shadow: 0 0 25px rgba(239, 68, 68, 0.2); }
-.lore-card:has(.badge-ice):hover { border-color: #2dd4bf; box-shadow: 0 0 25px rgba(45, 212, 191, 0.15); }
-.lore-card:has(.badge-magic):hover { border-color: #a855f7; box-shadow: 0 0 25px rgba(168, 85, 247, 0.2); }
-.lore-card:has(.badge-water):hover { border-color: #3b82f6; box-shadow: 0 0 25px rgba(59, 130, 246, 0.15); }
-
-/* Luxury Element Badges */
 .element-badge {
     align-self: flex-start;
-    padding: 6px 14px;
-    font-size: 0.8rem;
+    padding: 4px 10px;
+    font-size: 0.75rem;
     font-family: 'Cinzel', serif;
-    font-weight: 700;
     text-transform: uppercase;
     border-radius: 4px;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
+    margin-bottom: 15px;
 }
-
 .badge-air { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid #38bdf8; }
 .badge-earth { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #10b981; }
 .badge-electricity { background: rgba(245, 158, 11, 0.15); color: #fcd34d; border: 1px solid #f59e0b; }
@@ -294,105 +197,115 @@ body {
 .badge-magic { background: rgba(168, 85, 247, 0.15); color: #e9d5ff; border: 1px solid #a855f7; }
 .badge-water { background: rgba(59, 130, 246, 0.15); color: #bfdbfe; border: 1px solid #3b82f6; }
 
-/* Cinematic Decoder Module Component Panel */
+/* Decoder Module */
 .translator-section {
-    margin-top: 80px;
-    background: linear-gradient(135deg, #11151d 0%, #0d1016 100%);
+    margin-top: 60px;
+    background: #11151d;
     border: 2px solid #ca8a04;
-    padding: 45px;
-    border-radius: 8px;
-    box-shadow: 0 0 40px rgba(202, 138, 4, 0.08);
-}
-
-.translator-section h2 {
-    font-family: 'Cinzel', serif;
-    color: #fef08a;
-    border: none;
-    margin-bottom: 12px;
-    font-size: 2rem;
-    letter-spacing: 1px;
-}
-
-.translator-section p {
-    color: #94a3b8;
-    font-size: 1.05rem;
-    margin-bottom: 30px;
-}
-
-#codec-input {
-    width: 100%;
-    padding: 18px;
-    font-size: 1.1rem;
-    background: #06080c;
-    border: 2px solid #1f293d;
-    color: #f7e7ce;
-    font-family: inherit;
-    border-radius: 6px;
-    margin-bottom: 30px;
-    transition: border-color 0.3s;
-}
-
-#codec-input:focus {
-    outline: none;
-    border-color: #ca8a04;
-    box-shadow: 0 0 15px rgba(202, 138, 4, 0.2);
-}
-
-.codec-output-container {
-    background: #06080c;
     padding: 30px;
-    border-radius: 6px;
-    border-left: 4px solid #ca8a04;
+    border-radius: 8px;
 }
+.translator-section h2 { font-family: 'Cinzel', serif; color: #fef08a; font-size: 1.6rem; margin-bottom: 10px; }
+#codec-input {
+    width: 100%; padding: 15px; font-size: 1rem; background: #06080c;
+    border: 2px solid #1f293d; color: #f7e7ce; border-radius: 6px; margin-bottom: 20px;
+}
+.codec-output-container { background: #06080c; padding: 20px; border-radius: 6px; border-left: 4px solid #ca8a04; }
+#codec-output { font-family: monospace; font-size: 1.8rem; color: #fec006; word-wrap: break-word; }
 
-.codec-output-container strong {
-    font-family: 'Cinzel', serif;
-    color: #94a3b8;
-    letter-spacing: 1px;
-    display: block;
-    margin-bottom: 10px;
-}
-
-#codec-output {
-    font-family: monospace;
-    font-size: 2.2rem; /* Massive electrical transmission text */
-    letter-spacing: 6px;
-    color: #fec006;
-    word-wrap: break-word;
-    text-shadow: 0 0 15px rgba(254, 192, 6, 0.4);
-}
 /* ==========================================
-   MOBILE RESPONSIVE HANDLERS FOR THE SNIPPET
+   MOBILE-FIRST MODAL CONTAINER STRUCTURING
    ========================================== */
-@media (max-width: 680px) {
-    /* Make the content box adapt elegantly to phone width dimensions */
-    .modal-content {
-        width: 95% !important;
-        max-width: 100% !important;
-        padding: 40px 20px 25px 20px !important; /* Loosen up edge-padding */
-        margin: 10px;
-        max-height: 85vh; /* Prevents text bleeding off the bottom of the screen */
-        overflow-y: auto; /* Allows smooth scrolling inside the story if needed */
-    }
-
-    /* Scale title down so it doesn't break into awkward multiple lines */
-    .modal-content h2 {
-        font-size: 1.6rem !important;
-        margin-bottom: 20px !important;
-    }
-
-    /* Shrink the dialogue snippet text size slightly for quick parsing */
-    .story-text p {
-        font-size: 1.05rem !important;
-        line-height: 1.6 !important;
-        margin-bottom: 15px !important;
-    }
-
-    /* reposition the close 'X' button so readers don't accidentally click dialogue */
-    .modal-close {
-        top: 15px !important;
-        right: 15px !important;
-        font-size: 2rem !important;
-    }
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(4, 6, 9, 0.96);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 15px; /* Keeps card from touching phone glass borders */
 }
 
+.modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: #11151d;
+    border: 2px solid #d4af37;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    padding: 40px 25px 25px 25px;
+    position: relative;
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+    max-height: 85vh; /* Stops box from stretching beneath phone bounds */
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 2.2rem;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.modal-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: #d4af37;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.modal-content h2 {
+    font-family: 'Cinzel', serif;
+    color: #f7e7ce;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+/* This allows the story text to scroll cleanly inside your phone box */
+.story-text {
+    overflow-y: auto;
+    padding-right: 5px;
+    flex-grow: 1;
+}
+
+.story-text p {
+    font-family: 'Georgia', serif;
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.story-text .dialogue-pause {
+    font-weight: bold;
+    color: #94a3b8;
+}
+
+/* Global Mobile View Adjustments Matrix */
+@media (max-width: 950px) {
+    .page-layout { grid-template-columns: 1fr; padding: 30px 15px; }
+    .sidebar-sticky { position: static; margin-bottom: 30px; }
+    .filter-controls { flex-direction: row; flex-wrap: wrap; }
+    .filter-btn { width: auto; padding: 10px 15px; font-size: 0.85rem; }
+    .book-title { font-size: 2.5rem; }
+}
