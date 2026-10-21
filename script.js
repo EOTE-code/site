@@ -89,3 +89,45 @@ const filterButtons = document.querySelectorAll('.filter-btn'); 
 // 3. Function to Dynamically Build & Display Cards
 function renderCards(filteredData) {
 gridContainer.innerHTML = "";
+// ==========================================
+// 6. ELECTRICITY CODEX: TRANSMISSION TRANSLATOR
+// ==========================================
+
+// Standard Morse map adjusted to your book rules: thunder (-) and lightning (・)
+const electricMorseCode = {
+    'A': '・-',    'B': '-・・・',  'C': '-・-・',  'D': '-・・',
+    'E': '・',     'F': '・・-・',  'G': '--・',    'H': '・・・・',
+    'I': '・・',    'J': '・---',   'K': '-・-',    'L': '・-・・',
+    'M': '--',     'N': '-・',     'O': '---',    'P': '・--・',
+    'Q': '---・',   'R': '・-・',   'S': '・・・',   'T': '-',
+    'U': '・・-',   'V': '・・・-',  'W': '・--',    'X': '-・・-',
+    'Y': '-・--',   'Z': '--・・',
+    '1': '・----',  '2': '・・---',  '3': '・・・--', '4': '・・・・-',
+    '5': '・・・・・', '6': '-・・・・', '7': '--・・・', '8': '---・・',
+    '9': '----・',  '0': '-----',
+    ' ': ' / ' // Space between words
+};
+
+// Select the input text box and the output display area
+const codecInput = document.getElementById('codec-input');
+const codecOutput = document.getElementById('codec-output');
+
+// Listen for when the reader types inside the text box
+codecInput.addEventListener('input', (event) => {
+    // Grab what they typed and make it uppercase
+    const rawText = event.target.value.toUpperCase();
+    
+    // Split the text into letters, map each letter to its code, join with spaces
+    const translatedArray = rawText.split('').map(character => {
+        // Return the custom symbol if found, otherwise keep the raw character (like punctuation)
+        return electricMorseCode[character] || character;
+    });
+
+    // If the input box is empty, show a placeholder dots transmission
+    if (rawText.trim() === "") {
+        codecOutput.textContent = "...";
+    } else {
+        // Display the translated characters separated by a small space
+        codecOutput.textContent = translatedArray.join(' ');
+    }
+});
