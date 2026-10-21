@@ -144,3 +144,47 @@ letter-spacing: 1px;
 font-size: 0.95rem;
 color: #cbd5e1;
 }
+/* Translator Component Styling */
+.translator-section {
+    background: #131720;
+    border: 1px dashed #eab308; /* Electric Yellow Border */
+    padding: 30px;
+    border-radius: 6px;
+    margin-top: 60px;
+    box-shadow: 0 0 15px rgba(234, 179, 8, 0.05);
+}
+
+#codec-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    background: #0b0d10;
+    border: 1px solid #475569;
+    color: #f7e7ce;
+    font-family: inherit;
+    border-radius: 4px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+#codec-input:focus {
+    outline: none;
+    border-color: #eab308;
+    box-shadow: 0 0 8px rgba(234, 179, 8, 0.3);
+}
+
+.codec-output-container {
+    background: #0b0d10;
+    padding: 15px;
+    border-radius: 4px;
+    border-left: 3px solid #eab308;
+}
+
+#codec-output {
+    font-family: monospace;
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    color: #eab308; /* Glowing Yellow Text */
+    margin-top: 8px;
+    word-wrap: break-word;
+}
