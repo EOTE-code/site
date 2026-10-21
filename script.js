@@ -1,4 +1,4 @@
-// 1. Lore Card Data Store Setup
+// 1. Full Data Store containing your book's Element Guide
 const elementalEchoes = [
     { title: "Air: Characteristics & Magic", type: "air", desc: "Known for their cheerful spirit and caring mindset. Their powers include Flying, Cloud Control, and Wind manipulation. As generations shift, their abilities fluidly change like the air itself." },
     { title: "Air: Royal Lineage", type: "air", desc: "The skies are guided by the sky court: Queen Sora, King Zephyr, Prince Nimbus, and Princess Iris." },
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const codecInput = document.getElementById('codec-input');
     const codecOutput = document.getElementById('codec-output');
 
-    // Render Function Engine
+    // 4. Render Function Engine
     function renderCards(filteredData) {
         if (!gridContainer) return;
         gridContainer.innerHTML = "";
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Sidebar Filter Click Handler Interface
+    // 5. Sidebar Filter Click Handler Interface
     if (filterButtons.length > 0) {
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Live Input Event Matrix for Decoder
+    // 6. Live Input Event Matrix for Decoder
     if (codecInput && codecOutput) {
         codecInput.addEventListener('input', (event) => {
             const rawText = event.target.value.toUpperCase();
@@ -86,6 +86,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 codecOutput.textContent = "...";
             } else {
                 codecOutput.textContent = translatedArray.join(' ');
+            }
+        });
+    }
+
+    // 7. BOOK PREVIEW SNIPPET INTERACTIVE PANEL (New Code Added Here)
+    const openSnippetBtn = document.getElementById('open-snippet-btn');
+    const closeSnippetBtn = document.getElementById('close-snippet-btn');
+    const snippetModal = document.getElementById('snippet-modal');
+
+    if (openSnippetBtn && snippetModal) {
+        openSnippetBtn.addEventListener('click', () => {
+            snippetModal.classList.add('open');
+            document.body.style.overflow = 'hidden'; 
+        });
+    }
+
+    if (closeSnippetBtn && snippetModal) {
+        closeSnippetBtn.addEventListener('click', () => {
+            snippetModal.classList.remove('open');
+            document.body.style.overflow = ''; 
+        });
+    }
+
+    if (snippetModal) {
+        snippetModal.addEventListener('click', (event) => {
+            if (event.target === snippetModal) {
+                snippetModal.classList.remove('open');
+                document.body.style.overflow = '';
             }
         });
     }
