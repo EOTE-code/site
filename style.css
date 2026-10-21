@@ -383,7 +383,7 @@ body {
     }
 }
 /* ==========================================
-   CINEMATIC SNIPPET MODAL STYLING
+   CINEMATIC SNIPPET MODAL STYLING (FIXED)
    ========================================== */
 .modal-overlay {
     position: fixed;
@@ -396,12 +396,15 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 2000;
+    
+    /* CRITICAL FIX: These two lines keep it completely hidden by default */
     opacity: 0;
-    pointer-events: none;
+    pointer-events: none; 
+    
     transition: opacity 0.4s ease;
 }
 
-/* This class gets activated by JavaScript toggle action */
+/* This class gets activated ONLY when you click the "Read A Snippet" button */
 .modal-overlay.open {
     opacity: 1;
     pointer-events: auto;
