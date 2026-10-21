@@ -1,4 +1,4 @@
-// 1. Lore Card Data Store Setup
+// 1. Data Store containing your book's Element Guide
 const elementalEchoes = [
     {
         title: "Air: Characteristics & Magic",
@@ -121,21 +121,23 @@ function renderCards(filteredData) {
 }
 
 // 5. Sidebar Filter Interface Logic
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
+if (filterButtons.length > 0) {
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-        const targetType = button.getAttribute('data-filter');
+            const targetType = button.getAttribute('data-filter');
 
-        if (targetType === "all") {
-            renderCards(elementalEchoes);
-        } else {
-            const filteredArray = elementalEchoes.filter(echo => echo.type === targetType);
-            renderCards(filteredArray);
-        }
+            if (targetType === "all") {
+                renderCards(elementalEchoes);
+            } else {
+                const filteredArray = elementalEchoes.filter(echo => echo.type === targetType);
+                renderCards(filteredArray);
+            }
+        });
     });
-});
+}
 
 // 6. Translator Matrix Hook
 if (codecInput && codecOutput) {
