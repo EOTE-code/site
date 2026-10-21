@@ -1,190 +1,384 @@
-/* Reset & Base Setup */ 
+/* Import Google Fonts for Cinematic/Fantasy Style */
+@import url('https://googleapis.com');
 
+/* Core Master Alignment Reset */
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-background-color: #0b0d10; /* Void Black */
-color: #e2e8f0;
-font-family: 'Georgia', serif;
-line-height: 1.6;
-} 
+    background-color: #06080c; /* Deep Void Obsidian */
+    color: #e2e8f0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.7;
+    padding-top: 80px; /* Spacing for bigger navbar */
+    overflow-x: hidden;
+}
 
-.container {
-max-width: 1100px;
-margin: 0 auto;
-padding: 40px 20px;
-} 
+/* Premium Navigation Header */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: rgba(13, 17, 23, 0.9);
+    backdrop-filter: blur(12px); /* Glassmorphism effect */
+    border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
 
-/* Typography Details */
+.nav-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 1.3rem;
+    letter-spacing: 4px;
+    color: #d4af37;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.nav-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    margin-left: 30px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+.nav-links a:hover {
+    color: #f7e7ce;
+    text-shadow: 0 0 10px rgba(247, 231, 206, 0.5);
+}
+
+/* Massive Cinematic Hero Layout Section */
 .hero {
-text-align: center;
-background: radial-gradient(circle, #1a1423 0%, #0b0d10 100%);
-padding: 100px 20px;
-border-bottom: 1px solid #d4af37;
-} 
+    position: relative;
+    text-align: center;
+    background: radial-gradient(circle at center, #1b1227 0%, #06080c 80%);
+    padding: 160px 20px;
+    border-bottom: 2px solid #d4af37;
+    box-shadow: inset 0 -50px 100px rgba(0,0,0,0.8), 0 10px 50px rgba(212, 175, 55, 0.05);
+}
+
+.subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    letter-spacing: 6px;
+    color: #d4af37;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
 
 .book-title {
-font-size: 3.5rem;
-color: #f7e7ce;
-letter-spacing: 3px;
-} 
+    font-size: 5.5rem; /* Massive Heading Size */
+    font-weight: 900;
+    color: #f7e7ce;
+    letter-spacing: 8px;
+    font-family: 'Cinzel', serif;
+    line-height: 1.1;
+    text-shadow: 0 0 30px rgba(247, 231, 206, 0.15);
+}
 
 .book-title span {
-font-size: 2rem;
-font-style: italic;
-color: #d4af37; /* Metallic Gold */
-} 
+    font-size: 3rem;
+    font-family: 'IM Fell English SC', serif;
+    font-style: italic;
+    color: #d4af37;
+    display: inline-block;
+    margin: 0 10px;
+}
 
 .tagline {
-margin: 20px 0;
-font-style: italic;
-color: #94a3b8;
-} 
+    margin: 35px auto;
+    font-style: italic;
+    color: #cbd5e1;
+    font-size: 1.4rem;
+    max-width: 700px;
+    font-family: 'Georgia', serif;
+}
 
-/* Button & Filter Menu Styles */
+/* CTA Alignment Buttons Row */
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 40px;
+}
+
 .btn {
-padding: 12px 24px;
-font-size: 1rem;
-cursor: pointer;
-border: none;
-margin: 5px;
-transition: 0.3s ease;
-} 
+    padding: 16px 40px;
+    font-size: 1.1rem;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-weight: bold;
+}
 
 .btn.primary {
-background-color: #d4af37;
-color: #0b0d10;
-font-weight: bold;
-} 
+    background-color: #d4af37;
+    color: #06080c;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
 
 .btn.secondary {
-background-color: transparent;
-color: #d4af37;
-border: 1px solid #d4af37;
-} 
+    background-color: transparent;
+    color: #d4af37;
+    border: 2px solid #d4af37;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+    letter-spacing: 3px;
+}
+
+/* Two-Column Screen Layout */
+.page-layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 100px 40px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 60px;
+}
+
+/* Asymmetric Sidebar Interface */
+.sidebar-sticky {
+    position: sticky;
+    top: 130px;
+}
+
+.sidebar h3 {
+    font-family: 'Cinzel', serif;
+    color: #f7e7ce;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+}
+
+.sidebar p {
+    font-size: 1rem;
+    color: #94a3b8;
+    margin-bottom: 35px;
+}
 
 .filter-controls {
-display: flex;
-justify-content: center;
-gap: 15px;
-margin: 30px 0;
-flex-wrap: wrap;
-} 
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
 .filter-btn {
-background: #1e293b;
-border: 1px solid #475569;
-color: #94a3b8;
-padding: 10px 20px;
-cursor: pointer;
-font-family: inherit;
-border-radius: 4px;
-transition: all 0.3s ease;
-} 
+    width: 100%;
+    text-align: left;
+    background: #11151d;
+    border: 1px solid #1f293d;
+    color: #94a3b8;
+    padding: 16px 20px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
 
 .filter-btn.active, .filter-btn:hover {
-border-color: #d4af37;
-color: #f7e7ce;
-box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-} 
+    border-color: #d4af37;
+    color: #f7e7ce;
+    background: #18202c;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+    padding-left: 26px; /* Elegant shift right when hovered */
+}
 
-/* Magic Card Grid Layout */
+/* Content Area Title */
+.content-display h2 {
+    font-family: 'Cinzel', serif;
+    color: #f7e7ce;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    border-bottom: 2px solid rgba(31, 41, 61, 0.5);
+    padding-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+/* Adaptive Three-Column Cards Matrix Grid */
 .grid-layout {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-gap: 25px;
-margin-top: 20px;
-} 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
 
-/* Lore Cards */
+/* Massive Magical Lore Cards Styling */
 .lore-card {
-background: #131720;
-border: 1px solid #2e3748;
-border-radius: 6px;
-padding: 24px;
-transition: transform 0.3s ease, border-color 0.3s ease;
-} 
-
-.lore-card:hover {
-transform: translateY(-5px);
-border-color: #d4af37;
-} 
+    background: #11151d;
+    border: 1px solid rgba(31, 41, 61, 0.8);
+    border-radius: 8px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
 .lore-card h3 {
-color: #f7e7ce;
-margin-bottom: 8px;
-font-size: 1.4rem;
-} 
-
-/* Magical Badge Indicators */
-.element-badge {
-display: inline-block;
-padding: 3px 10px;
-font-size: 0.75rem;
-font-weight: bold;
-text-transform: uppercase;
-border-radius: 12px;
-margin-bottom: 15px;
-letter-spacing: 1px;
-} 
-
-.badge-air { background: #38bdf8; color: #0369a1; }
-.badge-earth { background: #15803d; color: #bbf7d0; }
-.badge-electricity { background: #eab308; color: #451a03; }
-.badge-fire { background: #b91c1c; color: #fee2e2; }
-.badge-ice { background: #99f6e4; color: #115e59; }
-.badge-magic { background: #c084fc; color: #3b0764; }
-.badge-water { background: #2563eb; color: #dbeafe; } 
+    font-family: 'Cinzel', serif;
+    color: #f7e7ce;
+    margin-bottom: 12px;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
 
 .lore-card p {
-font-size: 0.95rem;
-color: #cbd5e1;
+    font-size: 1.05rem;
+    color: #cbd5e1;
 }
-/* Translator Component Styling */
+
+/* Individual Custom Element Hover Glow Filters */
+.lore-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.lore-card:has(.badge-air):hover { border-color: #38bdf8; box-shadow: 0 0 25px rgba(56, 189, 248, 0.15); }
+.lore-card:has(.badge-earth):hover { border-color: #10b981; box-shadow: 0 0 25px rgba(16, 185, 129, 0.15); }
+.lore-card:has(.badge-electricity):hover { border-color: #f59e0b; box-shadow: 0 0 25px rgba(245, 158, 11, 0.2); }
+.lore-card:has(.badge-fire):hover { border-color: #ef4444; box-shadow: 0 0 25px rgba(239, 68, 68, 0.2); }
+.lore-card:has(.badge-ice):hover { border-color: #2dd4bf; box-shadow: 0 0 25px rgba(45, 212, 191, 0.15); }
+.lore-card:has(.badge-magic):hover { border-color: #a855f7; box-shadow: 0 0 25px rgba(168, 85, 247, 0.2); }
+.lore-card:has(.badge-water):hover { border-color: #3b82f6; box-shadow: 0 0 25px rgba(59, 130, 246, 0.15); }
+
+/* Luxury Element Badges */
+.element-badge {
+    align-self: flex-start;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.badge-air { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid #38bdf8; }
+.badge-earth { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #10b981; }
+.badge-electricity { background: rgba(245, 158, 11, 0.15); color: #fcd34d; border: 1px solid #f59e0b; }
+.badge-fire { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid #ef4444; }
+.badge-ice { background: rgba(45, 212, 191, 0.15); color: #99f6e4; border: 1px solid #2dd4bf; }
+.badge-magic { background: rgba(168, 85, 247, 0.15); color: #e9d5ff; border: 1px solid #a855f7; }
+.badge-water { background: rgba(59, 130, 246, 0.15); color: #bfdbfe; border: 1px solid #3b82f6; }
+
+/* Cinematic Decoder Module Component Panel */
 .translator-section {
-    background: #131720;
-    border: 1px dashed #eab308; /* Electric Yellow Border */
-    padding: 30px;
-    border-radius: 6px;
-    margin-top: 60px;
-    box-shadow: 0 0 15px rgba(234, 179, 8, 0.05);
+    margin-top: 80px;
+    background: linear-gradient(135deg, #11151d 0%, #0d1016 100%);
+    border: 2px solid #ca8a04;
+    padding: 45px;
+    border-radius: 8px;
+    box-shadow: 0 0 40px rgba(202, 138, 4, 0.08);
+}
+
+.translator-section h2 {
+    font-family: 'Cinzel', serif;
+    color: #fef08a;
+    border: none;
+    margin-bottom: 12px;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.translator-section p {
+    color: #94a3b8;
+    font-size: 1.05rem;
+    margin-bottom: 30px;
 }
 
 #codec-input {
     width: 100%;
-    padding: 12px;
+    padding: 18px;
     font-size: 1.1rem;
-    background: #0b0d10;
-    border: 1px solid #475569;
+    background: #06080c;
+    border: 2px solid #1f293d;
     color: #f7e7ce;
     font-family: inherit;
-    border-radius: 4px;
-    margin-top: 15px;
-    margin-bottom: 20px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    transition: border-color 0.3s;
 }
 
 #codec-input:focus {
     outline: none;
-    border-color: #eab308;
-    box-shadow: 0 0 8px rgba(234, 179, 8, 0.3);
+    border-color: #ca8a04;
+    box-shadow: 0 0 15px rgba(202, 138, 4, 0.2);
 }
 
 .codec-output-container {
-    background: #0b0d10;
-    padding: 15px;
-    border-radius: 4px;
-    border-left: 3px solid #eab308;
+    background: #06080c;
+    padding: 30px;
+    border-radius: 6px;
+    border-left: 4px solid #ca8a04;
+}
+
+.codec-output-container strong {
+    font-family: 'Cinzel', serif;
+    color: #94a3b8;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 10px;
 }
 
 #codec-output {
     font-family: monospace;
-    font-size: 1.5rem;
-    letter-spacing: 3px;
-    color: #eab308; /* Glowing Yellow Text */
-    margin-top: 8px;
+    font-size: 2.2rem; /* Massive electrical transmission text */
+    letter-spacing: 6px;
+    color: #fec006;
     word-wrap: break-word;
+    text-shadow: 0 0 15px rgba(254, 192, 6, 0.4);
+}
+
+/* Mobile Responsive Formatting Handling Layout */
+@media (max-width: 1000px) {
+    .page-layout {
+        grid-template-columns: 1fr;
+        padding: 60px 20px;
+    }
+    .sidebar-sticky {
+        position: static;
+    }
+    .filter-controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .filter-btn {
+        width: auto;
+    }
+    .book-title {
+        font-size: 3.5rem;
+    }
 }
