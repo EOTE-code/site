@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- This line tells mobile phones how to scale the screen perfectly -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Echoes of the Elements | Official Book Site</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
@@ -79,20 +78,22 @@
 
     </main>
 
-    <!-- CINEMATIC SNIPPET MODAL POPUP WINDOW -->
+    <!-- FIXED MOBILE STORY SNIPPET MODAL OVERLAY -->
     <div id="snippet-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="close-snippet-btn" class="modal-close">&times;</button>
-            <span class="modal-badge">Exclusive Preview</span>
-            <h2>Ember & Coral</h2>
-            <div class="story-text">
-                <p>Ember looked at Coral.</p>
-                <p>“I didn’t want to tell you until I sorted it all out.” Ember turned slightly.</p>
-                <p class="dialogue-pause">“...”</p>
-                <p>Coral held her spear close to Ember's chest.</p>
-                <p>“Coral please don't do this.” Ember's voice trembled.</p>
-                <p>“I’ll make you pay for what you did. I defended you! I cared for you! I even…” There was a pause. “I-I even trusted you! This is the only way it's going to be.”</p>
-                <p>Coral had tears forming in her eyes…</p>
+        <div class="modal-mobile-wrapper">
+            <div class="modal-content">
+                <button id="close-snippet-btn" class="modal-close" aria-label="Close Preview">&times;</button>
+                <span class="modal-badge">Exclusive Preview</span>
+                <h2>Ember & Coral</h2>
+                <div class="story-text">
+                    <p>Ember looked at Coral.</p>
+                    <p>“I didn’t want to tell you until I sorted it all out.” Ember turned slightly.</p>
+                    <p class="dialogue-pause">“...”</p>
+                    <p>Coral held her spear close to Ember's chest.</p>
+                    <p>“Coral please don't do this.” Ember's voice trembled.</p>
+                    <p>“I’ll make you pay for what you did. I defended you! I cared for you! I even…” There was a pause. “I-I even trusted you! This is the only way it's going to be.”</p>
+                    <p>Coral had tears forming in her eyes…</p>
+                </div>
             </div>
         </div>
     </div>
