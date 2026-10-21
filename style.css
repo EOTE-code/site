@@ -1,3 +1,6 @@
+/* ==========================================
+   1. FONTS & ROOT LAYOUT ENGINE
+   ========================================== */
 @import url('https://googleapis.com');
 
 * {
@@ -6,21 +9,20 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: #06080c;
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; /* Stops horizontal scrolling layout glitches */
+    background-color: #06080c; /* Obsidian Void Black */
     color: #e2e8f0;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    line-height: 1.7;
-    padding-top: 80px;
-    overflow-x: hidden;
-    width: 100%;
+    line-height: 1.6;
+    padding-top: 80px; /* Space for fixed navigation bar */
 }
 
-/* Floating Navigation Header */
+/* ==========================================
+   2. INTERACTIVE GLASS NAVIGATION HEADER
+   ========================================== */
 .navbar {
     position: fixed;
     top: 0;
@@ -37,7 +39,7 @@ body {
 
 .nav-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
@@ -57,138 +59,128 @@ body {
     color: #94a3b8;
     text-decoration: none;
     font-family: 'Cinzel', serif;
-    margin-left: 20px;
-    font-size: 0.9rem;
-    transition: all 0.3s;
+    margin-left: 15px;
+    font-size: 0.85rem;
+    transition: color 0.3s;
 }
 
-/* Cinematic Hero */
+.nav-links a:hover {
+    color: #f7e7ce;
+}
+
+/* ==========================================
+   3. CINEMATIC AUTHOR HERO GRID BANNER
+   ========================================== */
 .hero {
     text-align: center;
     background: radial-gradient(circle at center, #1b1227 0%, #06080c 80%);
-    padding: 100px 20px;
+    padding: 80px 20px;
     border-bottom: 2px solid #d4af37;
 }
 
 .subtitle {
     font-family: 'Cinzel', serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     letter-spacing: 4px;
     color: #d4af37;
     text-transform: uppercase;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .book-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 900;
     color: #f7e7ce;
-    letter-spacing: 4px;
     font-family: 'Cinzel', serif;
     line-height: 1.2;
 }
 
-.book-title span {
-    font-size: 2rem;
-    font-family: 'IM Fell English SC', serif;
-    color: #d4af37;
+.book-title span { 
+    font-size: 1.8rem; 
+    font-family: 'IM Fell English SC', serif; 
+    color: #d4af37; 
 }
 
-.tagline {
-    margin: 25px auto;
-    font-style: italic;
-    color: #cbd5e1;
-    font-size: 1.2rem;
-    max-width: 600px;
+.tagline { 
+    margin: 20px auto; 
+    font-style: italic; 
+    color: #cbd5e1; 
+    font-size: 1.1rem; 
+    max-width: 600px; 
 }
 
 .cta-buttons {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 30px;
-    flex-wrap: wrap;
+    margin-top: 25px;
+    flex-wrap: wrap; /* Auto-stacks buttons cleanly if phone display is tiny */
 }
 
 .btn {
-    padding: 14px 30px;
-    font-size: 1rem;
+    padding: 12px 24px;
+    font-size: 0.95rem;
     font-family: 'Cinzel', serif;
     cursor: pointer;
     border: none;
     border-radius: 4px;
-    transition: all 0.3s ease;
     font-weight: bold;
+    transition: all 0.3s ease;
 }
 
 .btn.primary { background-color: #d4af37; color: #06080c; }
 .btn.secondary { background-color: transparent; color: #d4af37; border: 2px solid #d4af37; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
 
-/* Structural Content Split Grid */
+/* ==========================================
+   4. MOBILE-FIRST RESPONSIVE MAIN GRID
+   ========================================== */
 .page-layout {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 40px 20px;
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 1fr; /* Mobile Default: Stack columns vertically */
     gap: 40px;
 }
 
-.sidebar-sticky { position: sticky; top: 110px; }
-.sidebar h3 { font-family: 'Cinzel', serif; color: #f7e7ce; margin-bottom: 10px; font-size: 1.6rem; }
-.sidebar p { font-size: 0.95rem; color: #94a3b8; margin-bottom: 25px; }
+.sidebar h3 { font-family: 'Cinzel', serif; color: #f7e7ce; margin-bottom: 10px; font-size: 1.5rem; }
+.sidebar p { font-size: 0.9rem; color: #94a3b8; margin-bottom: 20px; }
 
-.filter-controls { display: flex; flex-direction: column; gap: 10px; }
+.filter-controls { display: flex; flex-direction: row; flex-wrap: wrap; gap: 8px; }
 .filter-btn {
-    width: 100%;
-    text-align: left;
     background: #11151d;
     border: 1px solid #1f293d;
     color: #94a3b8;
-    padding: 14px 18px;
+    padding: 10px 16px;
     cursor: pointer;
     font-family: 'Cinzel', serif;
-    border-radius: 6px;
+    font-size: 0.85rem;
+    border-radius: 4px;
     transition: all 0.2s ease;
 }
 .filter-btn.active, .filter-btn:hover { border-color: #d4af37; color: #f7e7ce; background: #18202c; }
 
-.content-display h2 {
-    font-family: 'Cinzel', serif;
-    color: #f7e7ce;
-    font-size: 2rem;
-    margin-bottom: 30px;
-    border-bottom: 2px solid rgba(31, 41, 61, 0.5);
-    padding-bottom: 15px;
-}
+.content-display h2 { font-family: 'Cinzel', serif; color: #f7e7ce; font-size: 1.8rem; margin-bottom: 25px; border-bottom: 2px solid #1f293d; padding-bottom: 10px; }
+.grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 
-.grid-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+/* ==========================================
+   5. GLOWING LORE CARDS & HOUSE BADGES
+   ========================================== */
+.lore-card { 
+    background: #11151d; 
+    border: 1px solid #1f293d; 
+    border-radius: 8px; 
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
+.lore-card:hover { transform: translateY(-4px); border-color: #d4af37; }
+.lore-card h3 { font-family: 'Cinzel', serif; color: #f7e7ce; margin-bottom: 8px; font-size: 1.25rem; }
+.lore-card p { font-size: 0.95rem; color: #cbd5e1; }
 
-.lore-card {
-    background: #11151d;
-    border: 1px solid rgba(31, 41, 61, 0.8);
-    border-radius: 8px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-}
-
-.lore-card h3 { font-family: 'Cinzel', serif; color: #f7e7ce; margin-bottom: 10px; font-size: 1.3rem; }
-.lore-card p { font-size: 1rem; color: #cbd5e1; }
-
-.element-badge {
-    align-self: flex-start;
-    padding: 4px 10px;
-    font-size: 0.75rem;
-    font-family: 'Cinzel', serif;
-    text-transform: uppercase;
-    border-radius: 4px;
-    margin-bottom: 15px;
-}
+.element-badge { align-self: flex-start; padding: 4px 10px; font-size: 0.7rem; font-family: 'Cinzel', serif; border-radius: 4px; margin-bottom: 15px; }
 .badge-air { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid #38bdf8; }
 .badge-earth { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #10b981; }
 .badge-electricity { background: rgba(245, 158, 11, 0.15); color: #fcd34d; border: 1px solid #f59e0b; }
@@ -197,40 +189,30 @@ body {
 .badge-magic { background: rgba(168, 85, 247, 0.15); color: #e9d5ff; border: 1px solid #a855f7; }
 .badge-water { background: rgba(59, 130, 246, 0.15); color: #bfdbfe; border: 1px solid #3b82f6; }
 
-/* Decoder Module */
-.translator-section {
-    margin-top: 60px;
-    background: #11151d;
-    border: 2px solid #ca8a04;
-    padding: 30px;
-    border-radius: 8px;
-}
-.translator-section h2 { font-family: 'Cinzel', serif; color: #fef08a; font-size: 1.6rem; margin-bottom: 10px; }
-#codec-input {
-    width: 100%; padding: 15px; font-size: 1rem; background: #06080c;
-    border: 2px solid #1f293d; color: #f7e7ce; border-radius: 6px; margin-bottom: 20px;
-}
-.codec-output-container { background: #06080c; padding: 20px; border-radius: 6px; border-left: 4px solid #ca8a04; }
-#codec-output { font-family: monospace; font-size: 1.8rem; color: #fec006; word-wrap: break-word; }
+/* ==========================================
+   6. ELECTRIC CODES DECODER CONSOLE
+   ========================================== */
+.translator-section { margin-top: 40px; background: #11151d; border: 2px solid #ca8a04; padding: 20px; border-radius: 8px; }
+.translator-section h2 { font-family: 'Cinzel', serif; color: #fef08a; font-size: 1.4rem; margin-bottom: 10px; }
+.translator-section p { font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px; }
+#codec-input { width: 100%; padding: 12px; font-size: 1rem; background: #06080c; border: 2px solid #1f293d; color: #f7e7ce; border-radius: 6px; margin-bottom: 15px; }
+.codec-output-container { background: #06080c; padding: 15px; border-radius: 6px; border-left: 4px solid #ca8a04; }
+#codec-output { font-family: monospace; font-size: 1.5rem; color: #fec006; word-wrap: break-word; letter-spacing: 2px; text-shadow: 0 0 8px rgba(254, 192, 6, 0.5); }
 
 /* ==========================================
-   MOBILE-FIRST MODAL CONTAINER STRUCTURING
+   7. FIXED MOBILE COMPACT PREVIEW WINDOW
    ========================================== */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(4, 6, 9, 0.96);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: rgba(4, 6, 9, 0.97);
+    z-index: 99999; /* Forces modal atop absolute elements and headers */
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
-    padding: 15px; /* Keeps card from touching phone glass borders */
+    transition: opacity 0.3s ease-out;
 }
 
 .modal-overlay.open {
@@ -238,74 +220,71 @@ body {
     pointer-events: auto;
 }
 
+.modal-mobile-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px; /* Absolute edge safety margin spacing */
+}
+
 .modal-content {
     background: #11151d;
     border: 2px solid #d4af37;
     border-radius: 8px;
     width: 100%;
-    max-width: 600px;
-    padding: 40px 25px 25px 25px;
+    max-width: 580px;
+    padding: 35px 20px 20px 20px;
     position: relative;
-    box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
-    max-height: 85vh; /* Stops box from stretching beneath phone bounds */
+    max-height: 80vh; /* Keeps snippet box trapped safely inside screen frame dimensions */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
 }
 
 .modal-close {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 8px;
+    right: 14px;
     background: transparent;
     border: none;
     color: #94a3b8;
     font-size: 2.2rem;
+    line-height: 1;
     cursor: pointer;
-    z-index: 10;
+    transition: color 0.2s;
 }
+.modal-close:hover { color: #ef4444; }
 
-.modal-badge {
-    font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    color: #d4af37;
-    letter-spacing: 2px;
-    margin-bottom: 5px;
-}
+.modal-badge { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #d4af37; letter-spacing: 2px; margin-bottom: 5px; }
+.modal-content h2 { font-family: 'Cinzel', serif; color: #f7e7ce; font-size: 1.6rem; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid rgba(148, 163, 184, 0.2); }
 
-.modal-content h2 {
-    font-family: 'Cinzel', serif;
-    color: #f7e7ce;
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
-}
-
-/* This allows the story text to scroll cleanly inside your phone box */
+/* Swipe Scroller Mechanics Box */
 .story-text {
-    overflow-y: auto;
+    overflow-y: auto; /* Activates scrolling natively if text goes past box height */
+    -webkit-overflow-scrolling: touch; /* Mobile touch acceleration alignment rule */
     padding-right: 5px;
     flex-grow: 1;
 }
 
-.story-text p {
-    font-family: 'Georgia', serif;
-    font-size: 1.1rem;
-    color: #cbd5e1;
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
+.story-text p { font-family: 'Georgia', serif; font-size: 1.1rem; color: #cbd5e1; margin-bottom: 15px; line-height: 1.6; }
+.story-text .dialogue-pause { font-weight: bold; color: #94a3b8; }
 
-.story-text .dialogue-pause {
-    font-weight: bold;
-    color: #94a3b8;
-}
-
-/* Global Mobile View Adjustments Matrix */
-@media (max-width: 950px) {
-    .page-layout { grid-template-columns: 1fr; padding: 30px 15px; }
-    .sidebar-sticky { position: static; margin-bottom: 30px; }
-    .filter-controls { flex-direction: row; flex-wrap: wrap; }
-    .filter-btn { width: auto; padding: 10px 15px; font-size: 0.85rem; }
-    .book-title { font-size: 2.5rem; }
+/* ==========================================
+   8. LARGER MONITOR MEDIA QUERIES (DESKTOP)
+   ========================================== */
+@media (min-width: 900px) {
+    .page-layout {
+        grid-template-columns: 280px 1fr; /* Side-by-side splits on desktop monitors */
+        gap: 50px;
+        padding: 60px 40px;
+    }
+    .sidebar-sticky { position: sticky; top: 120px; }
+    .filter-controls { flex-direction: column; }
+    .book-title { font-size: 4.5rem; }
+    .book-title span { font-size: 2.5rem; }
+    .hero { padding: 140px 20px; }
+    .nav-container { padding: 0 40px; }
+    .modal-content { padding: 45px 40px 30px 40px; max-height: 75vh; }
+    .modal-close { top: 15px; right: 20px; }
 }
