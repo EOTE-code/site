@@ -361,117 +361,38 @@ body {
     word-wrap: break-word;
     text-shadow: 0 0 15px rgba(254, 192, 6, 0.4);
 }
-
-/* Mobile Responsive Formatting Handling Layout */
-@media (max-width: 1000px) {
-    .page-layout {
-        grid-template-columns: 1fr;
-        padding: 60px 20px;
-    }
-    .sidebar-sticky {
-        position: static;
-    }
-    .filter-controls {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    .filter-btn {
-        width: auto;
-    }
-    .book-title {
-        font-size: 3.5rem;
-    }
-}
 /* ==========================================
-   CINEMATIC SNIPPET MODAL STYLING (FIXED)
+   MOBILE RESPONSIVE HANDLERS FOR THE SNIPPET
    ========================================== */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(4, 6, 9, 0.95); /* Deep dark overlay mask */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    
-    /* CRITICAL FIX: These two lines keep it completely hidden by default */
-    opacity: 0;
-    pointer-events: none; 
-    
-    transition: opacity 0.4s ease;
+@media (max-width: 680px) {
+    /* Make the content box adapt elegantly to phone width dimensions */
+    .modal-content {
+        width: 95% !important;
+        max-width: 100% !important;
+        padding: 40px 20px 25px 20px !important; /* Loosen up edge-padding */
+        margin: 10px;
+        max-height: 85vh; /* Prevents text bleeding off the bottom of the screen */
+        overflow-y: auto; /* Allows smooth scrolling inside the story if needed */
+    }
+
+    /* Scale title down so it doesn't break into awkward multiple lines */
+    .modal-content h2 {
+        font-size: 1.6rem !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* Shrink the dialogue snippet text size slightly for quick parsing */
+    .story-text p {
+        font-size: 1.05rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* reposition the close 'X' button so readers don't accidentally click dialogue */
+    .modal-close {
+        top: 15px !important;
+        right: 15px !important;
+        font-size: 2rem !important;
+    }
 }
 
-/* This class gets activated ONLY when you click the "Read A Snippet" button */
-.modal-overlay.open {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.modal-content {
-    background: #11151d;
-    border: 2px solid #d4af37; /* Royal Gold Frame border */
-    border-radius: 8px;
-    width: 90%;
-    max-width: 650px;
-    padding: 50px 40px;
-    position: relative;
-    box-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
-    transform: translateY(20px);
-    transition: transform 0.4s ease;
-}
-
-.modal-overlay.open .modal-content {
-    transform: translateY(0);
-}
-
-.modal-close {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    background: transparent;
-    border: none;
-    color: #94a3b8;
-    font-size: 2.5rem;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.modal-close:hover {
-    color: #ef4444;
-}
-
-.modal-badge {
-    display: inline-block;
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    color: #d4af37;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-.modal-content h2 {
-    font-family: 'Cinzel', serif;
-    color: #f7e7ce;
-    font-size: 2.2rem;
-    margin-bottom: 30px;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
-    padding-bottom: 10px;
-}
-
-.story-text p {
-    font-family: 'Georgia', serif;
-    font-size: 1.25rem;
-    color: #cbd5e1;
-    margin-bottom: 20px;
-    line-height: 1.8;
-}
-
-.story-text .dialogue-pause {
-    font-weight: bold;
-    color: #94a3b8;
-    letter-spacing: 4px;
-}
