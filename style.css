@@ -144,6 +144,13 @@ html, body {
     gap: 40px;
 }
 
+/* Tablet & Desktop Layout upgrade rules */
+@media (min-width: 768px) {
+    .page-layout {
+        grid-template-columns: 280px 1fr; /* Sidebar pinned alongside dashboard */
+    }
+}
+
 .sidebar h3 { font-family: 'Cinzel', serif; color: #f7e7ce; margin-bottom: 10px; font-size: 1.5rem; }
 .sidebar p { font-size: 0.9rem; color: #94a3b8; margin-bottom: 20px; }
 
@@ -259,220 +266,111 @@ html, body {
 .modal-badge { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #d4af37; letter-spacing: 2px; margin-bottom: 5px; }
 .modal-content h2 { font-family: 'Cinzel', serif; color: #f7e7ce; font-size: 1.6rem; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid rgba(148, 163, 184, 0.2); }
 
-/* Swipe Scroller Mechanics Box */
-.story-text {
-    overflow-y: auto; /* Activates scrolling natively if text goes past box height */
-    -webkit-overflow-scrolling: touch; /* Mobile touch acceleration alignment rule */
-    padding-right: 5px;
-    flex-grow: 1;
-}
-
-.story-text p { font-family: 'Georgia', serif; font-size: 1.1rem; color: #cbd5e1; margin-bottom: 15px; line-height: 1.6; }
-.story-text .dialogue-pause { font-weight: bold; color: #94a3b8; }
-
 /* ==========================================
-   8. LARGER MONITOR MEDIA QUERIES (DESKTOP)
+   8. INTEGRATED FANTASY FANBASE HUB INTERFACES
    ========================================== */
-@media (min-width: 900px) {
-    .page-layout {
-        grid-template-columns: 280px 1fr; /* Side-by-side splits on desktop monitors */
-        gap: 50px;
-        padding: 60px 40px;
-    }
-    .sidebar-sticky { position: sticky; top: 120px; }
-    .filter-controls { flex-direction: column; }
-    .book-title { font-size: 4.5rem; }
-    .book-title span { font-size: 2.5rem; }
-    .hero { padding: 140px 20px; }
-    .nav-container { padding: 0 40px; }
-    .modal-content { padding: 45px 40px 30px 40px; max-height: 75vh; }
-    .modal-close { top: 15px; right: 20px; }
-}
-/* ==========================================
-   1. GLOBAL STYLES & FANTASY THEMING
-   ========================================== */
-:root {
-    --bg-dark: #120e0b;          /* Deep obsidian/stone background */
-    --card-bg: #1c1612;          /* Roasted iron/wood card background */
-    --parchment: #f2e3c6;        /* Primary text and paper color */
-    --parchment-dim: #c5b497;    /* Secondary/muted text */
-    --gold: #dfb15b;             /* Magical accents, highlights, and headers */
-    --gold-hover: #fcd58c;       /* Interactive states */
-    --crimson: #a93c3c;          /* Warning states, blocks, and reports */
-    --border-scroll: #382c22;    /* Weathered iron dividers */
+.fanbase-hub-section h2 {
+    font-family: 'Cinzel', serif;
+    color: #f7e7ce;
 }
 
-body {
-    background-color: var(--bg-dark);
-    color: var(--parchment);
-    font-family: 'Georgia', serif; /* Gives an elegant, literary fantasy aesthetic */
-    line-height: 1.6;
-    margin: 0;
-    padding: 20px;
-}
-
-h1, h2, h3 {
-    color: var(--gold);
-    font-family: 'Cinzel', 'Georgia', serif;
-    letter-spacing: 1px;
-    margin-top: 0;
-}
-
-/* ==========================================
-   2. DASHBOARD & FORM LAYOUTS
-   ========================================== */
-.fan-dashboard {
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-}
-
-/* Profiles & Submission Container Cards */
-.profile-setup-card, .submission-hub, .fan-story-card {
-    background-color: var(--card-bg);
-    border: 2px solid var(--border-scroll);
+.profile-setup-card, .submission-hub {
+    background: #11151d;
+    border: 1px solid #1f293d;
     border-radius: 8px;
     padding: 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.profile-setup-card h3, .submission-hub h3, .feed-wrapper h3 {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    margin-bottom: 15px;
+    font-size: 1.25rem;
 }
 
 .form-group {
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
 }
 
-label {
-    color: var(--gold);
-    font-weight: bold;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-}
-
-/* Inputs, Select Dropdowns, and Textareas */
-input[type="text"], select, textarea {
-    background-color: #0f0b09;
-    border: 1px solid var(--border-scroll);
-    border-radius: 4px;
-    color: var(--parchment);
-    padding: 12px;
-    font-family: 'Georgia', serif;
-    font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-input[type="text"]:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: var(--gold);
-    box-shadow: 0 0 8px rgba(223, 177, 91, 0.3);
-}
-
-textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-#fanfic-body {
-    min-height: 250px; /* Gives more room for long story formats */
-}
-
-/* ==========================================
-   3. BUTTONS & INTERACTIVE ELEMENTS
-   ========================================== */
-.btn {
-    background-color: var(--gold);
-    color: #120e0b;
-    border: none;
-    border-radius: 4px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    font-family: 'Georgia', serif;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.btn:hover {
-    background-color: var(--gold-hover);
-}
-
-.btn:active {
-    transform: scale(0.98);
-}
-
-/* ==========================================
-   4. LIVE FAN FEED & CONTENT CARDS
-   ========================================== */
-#live-fan-feed {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.fan-story-card {
-    border-left: 4px solid var(--gold); /* Highlights user content natively */
-}
-
-.card-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border-scroll);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+.form-group label {
+    font-family: 'Cinzel', serif;
+    color: #94a3b8;
     font-size: 0.85rem;
-    color: var(--parchment-dim);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
 }
 
+/* Matching inputs style perfectly with your translator input box */
+.form-group input[type="text"], .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    background: #06080c;
+    border: 2px solid #1f293d;
+    color: #f7e7ce;
+    border-radius: 6px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: border-color 0.3s;
+}
+
+.form-group input[type="text"]:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #d4af37;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Fan Feed Cards Styling */
+.fan-story-card {
+    background-color: #11151d;
+    border: 1px solid #1f293d;
+border-left: 4px solid #d4af37; /* Gold accent anchor banner line */
+border-radius: 8px;
+padding: 20px;
+margin-bottom: 20px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+.card-meta {
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid #1f293d;
+padding-bottom: 10px;
+margin-bottom: 15px;
+font-size: 0.85rem;
+color: #94a3b8;
+}
 .card-meta strong {
-    color: var(--gold);
-    font-size: 1.05rem;
+color: #d4af37;
+font-family: 'Cinzel', serif;
 }
-
 .bio-text {
-    font-style: italic;
-    margin-left: 5px;
+font-style: italic;
+color: #cbd5e1;
 }
-
-.story-date {
-    opacity: 0.7;
-}
-
-.card-content h3 {
-    margin-bottom: 10px;
-}
-
 .card-content p {
-    white-space: pre-wrap; /* Preserves user paragraph breaks natively */
-    color: #eae0cc;
+white-space: pre-wrap;
+color: #cbd5e1;
+font-size: 0.95rem;
 }
-
-/* ==========================================
-   5. REPORT MODERATION ACTION
-   ========================================== */
-.card-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 15px;
-    border-top: 1px solid rgba(56, 44, 34, 0.4);
-    padding-top: 10px;
-}
-
+/* Danger Violation Flag Controls */
 .btn-flag {
-    background: none;
-    border: 1px solid rgba(169, 60, 60, 0.4);
-    color: var(--crimson);
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+background: transparent;
+border: 1px solid rgba(239, 68, 68, 0.3);
+color: #ef4444;
+padding: 6px 12px;
+border-radius: 4px;
+cursor: pointer;
+font-family: 'Cinzel', serif;
+font-size: 0.75rem;
+transition: all 0.2s ease;
 }
-
 .btn-flag:hover {
-    background-color: rgba(169, 60, 60, 0.15);
-    border-color: var(--crimson);
+background: rgba(239, 68, 68, 0.1);
+border-color: #ef4444;
 }
