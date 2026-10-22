@@ -120,4 +120,91 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Force run first-draw render call immediately
     renderCards(elementalEchoes);
+    // Append your sheet tab name target directly to your API endpoint
+const GOOGLE_SHEET_API_URL = "https://docs.google.com/spreadsheets/d/1stTH24yCqqZgFw6fCFuhjV8XuJ8isx8BtkUuIR0zTIc/edit?usp=sharing";
+
+const profanityBlacklist = ['Fuck', 'fuck', 'Bitch', 'bitch', 'Dick, 'dick', 'Asshole', 'asshole', 'Ass', 'ass, 'Retard', 'retard', 'Whore', 'whore', 'Penis', 'penis', 'Shit', 'shit', 'Autistic', 'austistic', 'Austism', 'austism', 'Cunt', 'cunt', 'Dumbass', 'dumbass', 'stupid', 'Stupid', 'Idiot', 'idiot', 'KKK', 'kkk', 'Damn', 'damn', 'daym', 'Daym', 'Hell', 'Suck', 'suck', 'Sucks', 'sucks']; // Add your banned terms here
+
+function checkForSneakyCussing(inputText) {
+    // 1. Convert text to lowercase
+    let standardizedText = inputText.toLowerCase();
+    
+    // 2. Remove ALL spaces, periods, underscores, and dashes temporarily 
+    // This turns "f.w_o  r.d" into "fword"
+    let strippedText = standardizedText.replace(/[\s\._\-]/g, '');
+
+    // 3. Scan the condensed text string against your blacklist
+    let containsBadWord = false;
+    profanityBlacklist.forEach(word => {
+        if (strippedText.includes(word)) {
+            containsBadWord = true;
+        }
+    });
+
+    return containsBadWord;
+}
+
+// How to integrate this check when a fan clicks "Publish"
+document.getElementById('submission-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const rawTitle = document.getElementById('content-title').value;
+    const rawBody = document.getElementById('fanfic-body').value;
+
+    // Run the bypass-proof check on both the title and story text
+    if (checkForSneakyCussing(rawTitle) || checkForSneakyCussing(rawBody)) {
+        // Stop the submission immediately before it ever touches your Google Sheet!
+        alert("Submission Blocked: Your text contains words or spacing that violate our community guidelines. Please keep content family-friendly.");
+        return; // Exits the function early, saving your spreadsheet data integrity
+    }
+
+    // If it passes the check, continue your standard code to push data to Google Sheets...
+    console.log("Text is clean! Sending to Google Sheets...");
+});
+// Handle Form Submission
+document.getElementById('submission-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Extract raw text from your dashboard input forms
+    const rawUsername = document.getElementById('fan-username').value || "AnonymousFan";
+    const rawBio = document.getElementById('fan-bio').value || "";
+    const rawTitle = document.getElementById('content-title').value;
+    const rawBody = document.getElementById('fanfic-body').value;
+
+    // Filter out cuss words BEFORE pushing text to your spreadsheet
+    const cleanUsername = filterProfanity(rawUsername);
+    const cleanBio = filterProfanity(rawBio);
+    const cleanTitle = filterProfanity(rawTitle);
+    const cleanBody = filterProfanity(rawBody);
+
+    // EXACT MATCH structure for your Google Sheets row 1 column layout
+    const payload = {
+        "Timestamp": new Date().toLocaleString(), // Generates legible date & time
+        "Username": cleanUsername,
+        "userBio": cleanBio,
+        "fanficTitle": cleanTitle,
+        "fanficBody": cleanBody
+    };
+
+    try {
+        const response = await fetch(GOOGLE_SHEET_API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            alert("Success! Your story has been recorded in the archives.");
+            document.getElementById('submission-form').reset();
+        } else {
+            alert("Sheet integration error. Check your API credentials.");
+        }
+    } catch (error) {
+        console.error("Network Error:", error);
+        alert("Failed to reach the database spreadsheet.");
+    }
+});
+
 });
