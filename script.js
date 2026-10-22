@@ -1,185 +1,67 @@
-// 1. Full Data Store containing your book's Element Guide
-const elementalEchoes = [
-    { title: "Air: Characteristics & Magic", type: "air", desc: "Known for their cheerful spirit and caring mindset. Their powers include Flying, Cloud Control, and Wind manipulation. As generations shift, their abilities fluidly change like the air itself." },
-    { title: "Air: Royal Lineage", type: "air", desc: "The skies are guided by the sky court: Queen Sora, King Zephyr, Prince Nimbus, and Princess Iris." },
-    { title: "Earth: Flora & Critter Traits", type: "earth", desc: "Deeply recognized for caring for living things. Flora elements control and accelerate plant growth, even sprouting trees from seeds. Critter elements converse with and command animals. Possessing both lineages is incredibly rare." },
-    { title: "Earth: Flora Royalty", type: "earth", desc: "The plant kingdom is led by Queen Firma and King Terra, alongside Princess Marigold, Princess Daisy, Princess Ivy, and their nephew, Prince Maple." },
-    { title: "Earth: Critter Royalty", type: "earth", desc: "The animal alignment is ruled by Queen Doe and King Bear, along with Princess Squirrel." },
-    { title: "Electricity: Traits & Code", type: "electricity", desc: "Known for an optimistic, highly energetic spirit. When an Electric element is born, a massive storm triggers. They communicate using a custom thunder (-) and lightning (・) Morse code system, and can easily short out the technology of Unpowers when angered." },
-    { title: "Electricity: Royal Lineage", type: "electricity", desc: "Ruled by Queen Spark, King Hurricane, Prince Bolt, Princess Tesla, and a mysterious second Prince whose true identity remains completely hidden." },
-    { title: "Fire: Weapon Mastery & Code", type: "fire", desc: "Recognized for their bitter, aggressive tones, Fire elements are heavily trained in combat and weapons from a young age. Beneath their insults, they can become deeply caring. They use unique symbolic codes featuring glyphs like 🔥 and 🌋 to hide their secret writing." },
-    { title: "Fire: Flame & Lava Royalty", type: "fire", desc: "The Flame Faction is ruled by Queen Seraphina, King Blaze, and Princess Fiammetta. The volcanic Lava Faction is commanded by Queen Volcanic, King Metamorphic, and Prince Igneous." },
-    { title: "Ice: Camouflage & Treats", type: "ice", desc: "Ranges from cool and chill to deeply icy. They have a flawless sense of temperature and are entirely immune to freezing. They often disguise themselves flawlessly in snowbanks to trick attackers, and create popsicles and snow cones on bright days." },
-    { title: "Ice: Royal Lineage", type: "ice", desc: "The frozen expanses are commanded by Queen Icicle, King Hailstorm, Prince Snowstorm, and Princess Crystal." },
-    { title: "Magic: Shardlight & Censorship", type: "magic", desc: "Deceiving and mischievous sorcerers of raw power. Following an ancient war between Starlight and Shardlight factions, Starlight magic was completely banned and punished. Users of Shardlight dark magic are frequently controlled by Dark Shard. If any mortal human spots their magic, sorcerers instantly change or erase that human's memories." },
-    { title: "Magic: Royal Lineage", type: "magic", desc: "The historic ledger of rulers is incomplete. The only active king recognized by the dark faction is the terrifying entity known as the Dark Shard." },
-    { title: "Water: Palaces & Hidden Spells", type: "water", desc: "Famous for strange-tasting seafood dishes and a profound love of sealife. All Water elements breathe and speak underwater perfectly. They maintain an above-ground court and a breathtaking submerged palace." },
-    { title: "Water: The Lost Blessing", type: "water", desc: "History rumors a legendary ancient water caster who enchanted the underwater palace so visiting guests from other elements could breathe water naturally during their stay. That legendary magic has since been lost to history." },
-    { title: "Water: Royal Lineage", type: "water", desc: "The vast oceanic depths are protected by Queen Current and King Dorsal." }
-];
 
-// 2. Electric Morse Code Translation Dictionary Mapping
-const electricMorseCode = {
-    'A': '・-', 'B': '-・・・', 'C': '-・-・', 'D': '-・・', 'E': '・', 
-    'F': '・・-・', 'G': '--・', 'H': '・・・・', 'I': '・・', 'J': '・---', 
-    'K': '-・-', 'L': '・-・・', 'M': '--', 'N': '-・', 'O': '---', 
-    'P': '・--・', 'Q': '---・', 'R': '・-・', 'S': '・・・', 'T': '-', 
-    'U': '・・-', 'V': '・・・-', 'W': '・--', 'X': '-・・-', 'Y': '-・--', 
-    'Z': '--・・', '1': '・----', '2': '・・---', '3': '・・・--', '4': '・・・・-', 
-    '5': '・・・・・', '6': '-・・・・', '7': '--・・・', '8': '---・・', '9': '----・', 
-    '0': '-----', ' ': ' / '
-};
 
-// 3. Execution Function Wrapper to guarantee DOM elements exist on run
-document.addEventListener("DOMContentLoaded", () => {
-    const gridContainer = document.getElementById('elements-grid');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const codecInput = document.getElementById('codec-input');
-    const codecOutput = document.getElementById('codec-output');
+/* ==========================================================================
+   1. GLOBAL CONFIGURATION & CORE SETTINGS
+   ========================================================================== */
+// Replace YOUR_UNIQUE_API_ID with your actual Sheet Best or Stein endpoint token
+const GOOGLE_SHEET_CONTENT_URL = "https://docs.google.com/spreadsheets/d/1stTH24yCqqZgFw6fCFuhjV8XuJ8isx8BtkUuIR0zTIc/edit?usp=sharing";
+const GOOGLE_SHEET_REPORTS_URL = "https://docs.google.com/spreadsheets/d/1stTH24yCqqZgFw6fCFuhjV8XuJ8isx8BtkUuIR0zTIc/edit?usp=sharing";
 
-    // 4. Render Function Engine
-    function renderCards(filteredData) {
-        if (!gridContainer) return;
-        gridContainer.innerHTML = "";
+// The master blacklist for your community
+const profanityBlacklist = ['Fuck', 'fuck', 'Bitch', 'bitch', 'Dick, 'dick', 'Asshole', 'asshole', 'Ass', 'ass, 'Retard', 'retard', 'Whore', 'whore', 'Penis', 'penis', 'Shit', 'shit', 'Autistic', 'austistic', 'Austism', 'austism', 'Cunt', 'cunt', 'Dumbass', 'dumbass', 'stupid', 'Stupid', 'Idiot', 'idiot', 'KKK', 'kkk', 'Damn', 'damn', 'daym', 'Daym', 'Hell', 'Suck', 'suck', 'Sucks', 'sucks'];
 
-        filteredData.forEach(echo => {
-            const card = document.createElement('div');
-            card.classList.add('lore-card');
-            card.innerHTML = `
-                <span class="element-badge badge-${echo.type}">${echo.type}</span>
-                <h3>${echo.title}</h3>
-                <p>${echo.desc}</p>
-            `;
-            gridContainer.appendChild(card);
-        });
-    }
-
-    // 5. Sidebar Filter Click Handler Interface
-    if (filterButtons.length > 0) {
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                const targetType = button.getAttribute('data-filter');
-
-                if (targetType === "all") {
-                    renderCards(elementalEchoes);
-                } else {
-                    const filteredArray = elementalEchoes.filter(echo => echo.type === targetType);
-                    renderCards(filteredArray);
-                }
-            });
-        });
-    }
-
-    // 6. Live Input Event Matrix for Decoder
-    if (codecInput && codecOutput) {
-        codecInput.addEventListener('input', (event) => {
-            const rawText = event.target.value.toUpperCase();
-            
-            const translatedArray = rawText.split('').map(character => {
-                return electricMorseCode[character] || character;
-            });
-
-            if (rawText.trim() === "") {
-                codecOutput.textContent = "...";
-            } else {
-                codecOutput.textContent = translatedArray.join(' ');
-            }
-        });
-    }
-
-    // 7. BOOK PREVIEW SNIPPET INTERACTIVE PANEL (New Code Added Here)
-    const openSnippetBtn = document.getElementById('open-snippet-btn');
-    const closeSnippetBtn = document.getElementById('close-snippet-btn');
-    const snippetModal = document.getElementById('snippet-modal');
-
-    if (openSnippetBtn && snippetModal) {
-        openSnippetBtn.addEventListener('click', () => {
-            snippetModal.classList.add('open');
-            document.body.style.overflow = 'hidden'; 
-        });
-    }
-
-    if (closeSnippetBtn && snippetModal) {
-        closeSnippetBtn.addEventListener('click', () => {
-            snippetModal.classList.remove('open');
-            document.body.style.overflow = ''; 
-        });
-    }
-
-    if (snippetModal) {
-        snippetModal.addEventListener('click', (event) => {
-            if (event.target === snippetModal) {
-                snippetModal.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-        });
-    }
-
-    // Force run first-draw render call immediately
-    renderCards(elementalEchoes);
-    // Append your sheet tab name target directly to your API endpoint
-const GOOGLE_SHEET_API_URL = "https://docs.google.com/spreadsheets/d/1stTH24yCqqZgFw6fCFuhjV8XuJ8isx8BtkUuIR0zTIc/edit?usp=sharing";
-
-const profanityBlacklist = ['Fuck', 'fuck', 'Bitch', 'bitch', 'Dick, 'dick', 'Asshole', 'asshole', 'Ass', 'ass, 'Retard', 'retard', 'Whore', 'whore', 'Penis', 'penis', 'Shit', 'shit', 'Autistic', 'austistic', 'Austism', 'austism', 'Cunt', 'cunt', 'Dumbass', 'dumbass', 'stupid', 'Stupid', 'Idiot', 'idiot', 'KKK', 'kkk', 'Damn', 'damn', 'daym', 'Daym', 'Hell', 'Suck', 'suck', 'Sucks', 'sucks']; // Add your banned terms here
-
+/* ==========================================================================
+   2. AUTOMATED SECURITY & PROFANITY FILTERS
+   ========================================================================== */
+// The background shield that flattens strings to catch spacing bypasses (e.g. "a . s . s")
 function checkForSneakyCussing(inputText) {
-    // 1. Convert text to lowercase
     let standardizedText = inputText.toLowerCase();
-    
-    // 2. Remove ALL spaces, periods, underscores, and dashes temporarily 
-    // This turns "f.w_o  r.d" into "fword"
-    let strippedText = standardizedText.replace(/[\s\._\-]/g, '');
+    let strippedText = standardizedText.replace(/[\s\._\-]/g, ''); // Strips spaces, dots, dashes
 
-    // 3. Scan the condensed text string against your blacklist
     let containsBadWord = false;
     profanityBlacklist.forEach(word => {
         if (strippedText.includes(word)) {
             containsBadWord = true;
         }
     });
-
     return containsBadWord;
 }
 
-// How to integrate this check when a fan clicks "Publish"
+// Standard word boundary filter to sanitize regular incoming text safely
+function filterProfanity(inputText) {
+    let cleanText = inputText;
+    profanityBlacklist.forEach(word => {
+        const regex = new RegExp(`\\b${word}\\b`, 'gi');
+        cleanText = cleanText.replace(regex, '-'.repeat(word.length));
+    });
+    return cleanText;
+}
+
+/* ==========================================================================
+   3. DATA SENDING (CREATE / POST TO GOOGLE SHEETS)
+   ========================================================================== */
 document.getElementById('submission-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    const rawTitle = document.getElementById('content-title').value;
-    const rawBody = document.getElementById('fanfic-body').value;
-
-    // Run the bypass-proof check on both the title and story text
-    if (checkForSneakyCussing(rawTitle) || checkForSneakyCussing(rawBody)) {
-        // Stop the submission immediately before it ever touches your Google Sheet!
-        alert("Submission Blocked: Your text contains words or spacing that violate our community guidelines. Please keep content family-friendly.");
-        return; // Exits the function early, saving your spreadsheet data integrity
-    }
-
-    // If it passes the check, continue your standard code to push data to Google Sheets...
-    console.log("Text is clean! Sending to Google Sheets...");
-});
-// Handle Form Submission
-document.getElementById('submission-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    // Extract raw text from your dashboard input forms
     const rawUsername = document.getElementById('fan-username').value || "AnonymousFan";
     const rawBio = document.getElementById('fan-bio').value || "";
     const rawTitle = document.getElementById('content-title').value;
     const rawBody = document.getElementById('fanfic-body').value;
 
-    // Filter out cuss words BEFORE pushing text to your spreadsheet
+    // STEP 1: Hard block if they try to bypass with sneaky spaces or symbols
+    if (checkForSneakyCussing(rawTitle) || checkForSneakyCussing(rawBody) || checkForSneakyCussing(rawUsername)) {
+        alert("Submission Blocked: Your text contains words or spacing layouts that violate our guidelines. Please keep content family-friendly.");
+        return; // Exits immediately, refusing to write to your spreadsheet
+    }
+
+    // STEP 2: Standard sanitize formatting for any soft violations
     const cleanUsername = filterProfanity(rawUsername);
     const cleanBio = filterProfanity(rawBio);
     const cleanTitle = filterProfanity(rawTitle);
     const cleanBody = filterProfanity(rawBody);
 
-    // EXACT MATCH structure for your Google Sheets row 1 column layout
     const payload = {
-        "Timestamp": new Date().toLocaleString(), // Generates legible date & time
+        "Timestamp": new Date().toLocaleString(),
         "Username": cleanUsername,
         "userBio": cleanBio,
         "fanficTitle": cleanTitle,
@@ -187,24 +69,99 @@ document.getElementById('submission-form').addEventListener('submit', async func
     };
 
     try {
-        const response = await fetch(GOOGLE_SHEET_API_URL, {
+        const response = await fetch(GOOGLE_SHEET_CONTENT_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
 
         if (response.ok) {
             alert("Success! Your story has been recorded in the archives.");
             document.getElementById('submission-form').reset();
+            loadFanFeed(); // Refresh the feed immediately to show the new post
         } else {
-            alert("Sheet integration error. Check your API credentials.");
+            alert("Sheet integration error.");
         }
     } catch (error) {
         console.error("Network Error:", error);
-        alert("Failed to reach the database spreadsheet.");
     }
 });
 
-});
+/* ==========================================================================
+   4. DATA FETCHING (READ FROM GOOGLE SHEETS TO WEB FEED)
+   ========================================================================== */
+async function loadFanFeed() {
+    const feedContainer = document.getElementById('live-fan-feed');
+    if (!feedContainer) return; // Prevents errors if elements aren't built on the page yet
+    
+    feedContainer.innerHTML = "<p>Unrolling parchment scrolls...</p>";
+
+    try {
+        const response = await fetch(GOOGLE_SHEET_CONTENT_URL);
+        const stories = await response.json();
+
+        feedContainer.innerHTML = ""; // Clear out placeholder text
+
+        // Loop backwards to show the freshest community uploads first
+        stories.reverse().forEach((story, index) => {
+            const cardHTML = `
+                <article class="fan-story-card">
+                    <div class="card-meta">
+                        <strong>${story.Username}</strong> — <span class="bio-text">"${story.userBio}"</span>
+                        <small class="story-date">${story.Timestamp}</small>
+                    </div>
+                    <div class="card-content">
+                        <h3>${story.fanficTitle}</h3>
+                        <p>${story.fanficBody}</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-flag" onclick="flagContent('${index}', '${story.Username}', '${story.fanficTitle}')">⚠️ Report Violation</button>
+                    </div>
+                </article>
+            `;
+            feedContainer.insertAdjacentHTML('beforeend', cardHTML);
+        });
+    } catch (error) {
+        feedContainer.innerHTML = "<p>Failed to load the community feed. Please refresh.</p>";
+        console.error("Read error:", error);
+    }
+}
+
+// Automatically fire up the engine when the web visitor hits your site
+document.addEventListener("DOMContentLoaded", loadFanFeed);
+
+/* ==========================================================================
+   5. MODERATION SUBMISSIONS (REPORT LINK LOGIC)
+   ========================================================================== */
+async function flagContent(index, username, storyTitle) {
+    const reason = prompt(`Why are you reporting ${username}'s story "${storyTitle}"?\n(e.g., Harassment, bypass cussing, off-topic)`);
+    
+    if (reason === null || reason.trim() === "") {
+        alert("Report canceled.");
+        return;
+    }
+
+    const reportPayload = {
+        "Timestamp": new Date().toLocaleString(),
+        "FlaggedUser": username,
+        "StoryTitle": storyTitle,
+        "Reason": reason,
+        "Status": "Pending Review"
+    };
+
+    try {
+        const response = await fetch(GOOGLE_SHEET_REPORTS_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(reportPayload)
+        });
+
+        if (response.ok) {
+            alert("Thank you. This post has been flagged and submitted to the author for moderation review.");
+        } else {
+            alert("Could not process report.");
+        }
+    } catch (error) {
+        console.error("Reporting system error:", error);
+    }
+}
