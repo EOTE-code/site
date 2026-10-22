@@ -3,8 +3,8 @@
    ========================================================================== */
 // IMPORTANT: Replace these with your actual Sheet Best, Stein, or Apps Script endpoint URLs.
 // Do NOT use raw google.com/spreadsheets/ URLs here or the data connection will fail.
-const GOOGLE_SHEET_CONTENT_URL = "https://sheetbest.com";
-const GOOGLE_SHEET_REPORTS_URL = "https://sheetbest.com";
+const GOOGLE_SHEET_CONTENT_URL = "https://script.google.com/macros/s/AKfycbw99lO-RRbsDX-k8wHPkMrx-nxZ4BHok8_6_USv8huTeXaqQ7XcuQGJFOr2GFptRZHw/exec";
+const GOOGLE_SHEET_REPORTS_URL = "https://script.google.com/macros/s/AKfycbw99lO-RRbsDX-k8wHPkMrx-nxZ4BHok8_6_USv8huTeXaqQ7XcuQGJFOr2GFptRZHw/exec";
 
 // FIXED SYNTAX: Added missing quotes and made all terms lowercase for flawless comparison logic
 const profanityBlacklist = [
