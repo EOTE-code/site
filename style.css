@@ -288,3 +288,191 @@ html, body {
     .modal-content { padding: 45px 40px 30px 40px; max-height: 75vh; }
     .modal-close { top: 15px; right: 20px; }
 }
+/* ==========================================
+   1. GLOBAL STYLES & FANTASY THEMING
+   ========================================== */
+:root {
+    --bg-dark: #120e0b;          /* Deep obsidian/stone background */
+    --card-bg: #1c1612;          /* Roasted iron/wood card background */
+    --parchment: #f2e3c6;        /* Primary text and paper color */
+    --parchment-dim: #c5b497;    /* Secondary/muted text */
+    --gold: #dfb15b;             /* Magical accents, highlights, and headers */
+    --gold-hover: #fcd58c;       /* Interactive states */
+    --crimson: #a93c3c;          /* Warning states, blocks, and reports */
+    --border-scroll: #382c22;    /* Weathered iron dividers */
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--parchment);
+    font-family: 'Georgia', serif; /* Gives an elegant, literary fantasy aesthetic */
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: var(--gold);
+    font-family: 'Cinzel', 'Georgia', serif;
+    letter-spacing: 1px;
+    margin-top: 0;
+}
+
+/* ==========================================
+   2. DASHBOARD & FORM LAYOUTS
+   ========================================== */
+.fan-dashboard {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+/* Profiles & Submission Container Cards */
+.profile-setup-card, .submission-hub, .fan-story-card {
+    background-color: var(--card-bg);
+    border: 2px solid var(--border-scroll);
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: var(--gold);
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* Inputs, Select Dropdowns, and Textareas */
+input[type="text"], select, textarea {
+    background-color: #0f0b09;
+    border: 1px solid var(--border-scroll);
+    border-radius: 4px;
+    color: var(--parchment);
+    padding: 12px;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 8px rgba(223, 177, 91, 0.3);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+#fanfic-body {
+    min-height: 250px; /* Gives more room for long story formats */
+}
+
+/* ==========================================
+   3. BUTTONS & INTERACTIVE ELEMENTS
+   ========================================== */
+.btn {
+    background-color: var(--gold);
+    color: #120e0b;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn:hover {
+    background-color: var(--gold-hover);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================
+   4. LIVE FAN FEED & CONTENT CARDS
+   ========================================== */
+#live-fan-feed {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.fan-story-card {
+    border-left: 4px solid var(--gold); /* Highlights user content natively */
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-scroll);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    color: var(--parchment-dim);
+}
+
+.card-meta strong {
+    color: var(--gold);
+    font-size: 1.05rem;
+}
+
+.bio-text {
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.story-date {
+    opacity: 0.7;
+}
+
+.card-content h3 {
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    white-space: pre-wrap; /* Preserves user paragraph breaks natively */
+    color: #eae0cc;
+}
+
+/* ==========================================
+   5. REPORT MODERATION ACTION
+   ========================================== */
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+    border-top: 1px solid rgba(56, 44, 34, 0.4);
+    padding-top: 10px;
+}
+
+.btn-flag {
+    background: none;
+    border: 1px solid rgba(169, 60, 60, 0.4);
+    color: var(--crimson);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-flag:hover {
+    background-color: rgba(169, 60, 60, 0.15);
+    border-color: var(--crimson);
+}
