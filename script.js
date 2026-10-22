@@ -1,14 +1,17 @@
-
-
 /* ==========================================================================
    1. GLOBAL CONFIGURATION & CORE SETTINGS
    ========================================================================== */
-// Replace YOUR_UNIQUE_API_ID with your actual Sheet Best or Stein endpoint token
-const GOOGLE_SHEET_CONTENT_URL = "https://docs.google.com/spreadsheets/d/1stTH24yCqqZgFw6fCFuhjV8XuJ8isx8BtkUuIR0zTIc/edit?usp=sharing";
-const GOOGLE_SHEET_REPORTS_URL = "https://docs.google.com/spreadsheets/d/1stTH24yCqqZgFw6fCFuhjV8XuJ8isx8BtkUuIR0zTIc/edit?usp=sharing";
+// IMPORTANT: Replace these with your actual Sheet Best, Stein, or Apps Script endpoint URLs.
+// Do NOT use raw google.com/spreadsheets/ URLs here or the data connection will fail.
+const GOOGLE_SHEET_CONTENT_URL = "https://sheetbest.com";
+const GOOGLE_SHEET_REPORTS_URL = "https://sheetbest.com";
 
-// The master blacklist for your community
-const profanityBlacklist = ['Fuck', 'fuck', 'Bitch', 'bitch', 'Dick, 'dick', 'Asshole', 'asshole', 'Ass', 'ass, 'Retard', 'retard', 'Whore', 'whore', 'Penis', 'penis', 'Shit', 'shit', 'Autistic', 'austistic', 'Austism', 'austism', 'Cunt', 'cunt', 'Dumbass', 'dumbass', 'stupid', 'Stupid', 'Idiot', 'idiot', 'KKK', 'kkk', 'Damn', 'damn', 'daym', 'Daym', 'Hell', 'Suck', 'suck', 'Sucks', 'sucks'];
+// FIXED SYNTAX: Added missing quotes and made all terms lowercase for flawless comparison logic
+const profanityBlacklist = [
+    'fuck', 'bitch', 'dick', 'asshole', 'ass', 'retard', 'whore', 'penis', 'shit', 
+    'autistic', 'austism', 'cunt', 'dumbass', 'stupid', 'idiot', 'kkk', 
+    'damn', 'daym', 'hell', 'suck', 'sucks'
+];
 
 /* ==========================================================================
    2. AUTOMATED SECURITY & PROFANITY FILTERS
@@ -31,6 +34,7 @@ function checkForSneakyCussing(inputText) {
 function filterProfanity(inputText) {
     let cleanText = inputText;
     profanityBlacklist.forEach(word => {
+        // 'gi' flag ensures it catches both lowercase and uppercase inputs automatically
         const regex = new RegExp(`\\b${word}\\b`, 'gi');
         cleanText = cleanText.replace(regex, '-'.repeat(word.length));
     });
@@ -60,6 +64,7 @@ document.getElementById('submission-form').addEventListener('submit', async func
     const cleanTitle = filterProfanity(rawTitle);
     const cleanBody = filterProfanity(rawBody);
 
+    // Formatted payload to match your exact Google Sheet headers
     const payload = {
         "Timestamp": new Date().toLocaleString(),
         "Username": cleanUsername,
@@ -80,10 +85,11 @@ document.getElementById('submission-form').addEventListener('submit', async func
             document.getElementById('submission-form').reset();
             loadFanFeed(); // Refresh the feed immediately to show the new post
         } else {
-            alert("Sheet integration error.");
+            alert("Sheet integration error. Double check your API endpoint URL connection.");
         }
     } catch (error) {
         console.error("Network Error:", error);
+        alert("Failed to communicate with your database server.");
     }
 });
 
@@ -105,17 +111,20 @@ async function loadFanFeed() {
         // Loop backwards to show the freshest community uploads first
         stories.reverse().forEach((story, index) => {
             const cardHTML = `
-                <article class="fan-story-card">
-                    <div class="card-meta">
-                        <strong>${story.Username}</strong> — <span class="bio-text">"${story.userBio}"</span>
-                        <small class="story-date">${story.Timestamp}</small>
+                <article class="fan-story-card" style="background-color: var(--card-bg); border: 2px solid var(--border-scroll); border-radius: 8px; padding: 25px; margin-bottom: 20px; border-left: 4px solid var(--gold);">
+                    <div class="card-meta" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-scroll); padding-bottom: 10px; margin-bottom: 15px; font-size: 0.85rem; color: var(--parchment-dim);">
+                        <div>
+                            <strong style="color: var(--gold); font-size: 1.05rem;">${story.Username}</strong> 
+                            <span class="bio-text" style="font-style: italic; margin-left: 5px;">"${story.userBio}"</span>
+                        </div>
+                        <small class="story-date" style="opacity: 0.7;">${story.Timestamp}</small>
                     </div>
                     <div class="card-content">
-                        <h3>${story.fanficTitle}</h3>
-                        <p>${story.fanficBody}</p>
+                        <h3 style="color: var(--gold); margin-bottom: 10px;">${story.fanficTitle}</h3>
+                        <p style="white-space: pre-wrap; color: #eae0cc;">${story.fanficBody}</p>
                     </div>
-                    <div class="card-actions">
-                        <button class="btn-flag" onclick="flagContent('${index}', '${story.Username}', '${story.fanficTitle}')">⚠️ Report Violation</button>
+                    <div class="card-actions" style="display: flex; justify-content: flex-end; margin-top: 15px; border-top: 1px solid rgba(56, 44, 34, 0.4); padding-top: 10px;">
+                        <button class="btn-flag" onclick="flagContent('${index}', '${story.Username}', '${story.fanficTitle}')" style="background: none; border: 1px solid rgba(169, 60, 60, 0.4); color: var(--crimson); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">⚠️ Report Violation</button>
                     </div>
                 </article>
             `;
@@ -159,7 +168,7 @@ async function flagContent(index, username, storyTitle) {
         if (response.ok) {
             alert("Thank you. This post has been flagged and submitted to the author for moderation review.");
         } else {
-            alert("Could not process report.");
+            alert("Could not process report. Verify your reporting URL endpoint configuration.");
         }
     } catch (error) {
         console.error("Reporting system error:", error);
