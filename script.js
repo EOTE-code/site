@@ -16,14 +16,20 @@ const profanityBlacklist = [
 /* ==========================================================================
    2. AUTOMATED SECURITY & PROFANITY FILTERS
    ========================================================================== */
-// The background shield that flattens strings to catch spacing bypasses (e.g. "a . s . s")
+
+// FIXED: This function now targets spaces and dots inside matching patterns specifically,
+// preventing innocent sentences like "Ember had a sword" from getting falsely blocked.
 function checkForSneakyCussing(inputText) {
     let standardizedText = inputText.toLowerCase();
-    let strippedText = standardizedText.replace(/[\s\._\-]/g, ''); // Strips spaces, dots, dashes
 
     let containsBadWord = false;
     profanityBlacklist.forEach(word => {
-        if (strippedText.includes(word)) {
+        // This generates a dynamic pattern checking if letters have characters like spaces or dots between them
+        // Example for "fword": catches "f w o r d", "f.w.o.r.d", "f_w_o_r_d"
+        const sneakyPattern = word.split('').join('[\\s\\._\\-]*');
+        const regex = new RegExp(`\\b${sneakyPattern}\\b`, 'gi');
+
+        if (regex.test(standardizedText)) {
             containsBadWord = true;
         }
     });
@@ -34,12 +40,12 @@ function checkForSneakyCussing(inputText) {
 function filterProfanity(inputText) {
     let cleanText = inputText;
     profanityBlacklist.forEach(word => {
-        // 'gi' flag ensures it catches both lowercase and uppercase inputs automatically
         const regex = new RegExp(`\\b${word}\\b`, 'gi');
         cleanText = cleanText.replace(regex, '-'.repeat(word.length));
     });
     return cleanText;
 }
+
 
 /* ==========================================================================
    3. DATA SENDING (CREATE / POST TO GOOGLE SHEETS)
