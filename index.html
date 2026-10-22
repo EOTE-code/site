@@ -16,6 +16,7 @@
             <span class="nav-logo">ECHOES OF THE ELEMENTS</span>
             <div class="nav-links">
                 <a href="#lore">Lore Codex</a>
+                <a href="#fanbase-hub">Fan Archives</a>
                 <a href="#translator">Electric Decoder</a>
             </div>
         </div>
@@ -62,6 +63,53 @@
             <!-- Cards Grid Area -->
             <div id="elements-grid" class="grid-layout"></div>
 
+            <!-- INTEGRATED FANBASE HUB & SUBMISSION MECHANICS -->
+            <section class="fanbase-hub-section" id="fanbase-hub" style="margin-top: 50px; margin-bottom: 50px;">
+                <h2 style="border-bottom: 2px solid var(--border-scroll); padding-bottom: 10px;">The Scribe Archives (Fan Hub)</h2>
+                
+                <div class="fan-dashboard" style="display: grid; gap: 30px; margin-top: 20px;">
+                    <!-- 1. User Profile Setup Card -->
+                    <div class="profile-setup-card">
+                        <h3>Create Your Fan Profile</h3>
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="fan-username">Fan Username:</label>
+                                <input type="text" id="fan-username" placeholder="e.g., EmberFan99" required minlength="3" maxlength="25" style="width: 100%; box-sizing: border-box;">
+                            </div>
+                            <div class="form-group" style="margin-top: 15px;">
+                                <label for="fan-bio">Your Mini-Bio:</label>
+                                <textarea id="fan-bio" placeholder="Tell the fanbase about yourself... Max 150 characters" maxlength="150" style="width: 100%; box-sizing: border-box;"></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- 2. Content Submission Hub -->
+                    <div class="submission-hub">
+                        <h3>Share Your Creations</h3>
+                        <form id="submission-form">
+                            <div class="form-group">
+                                <label for="content-title">Title of Your Work:</label>
+                                <input type="text" id="content-title" required placeholder="Name your fanfiction story" style="width: 100%; box-sizing: border-box;">
+                            </div>
+                            
+                            <div class="form-group" style="margin-top: 15px;">
+                                <label for="fanfic-body">Write your story:</label>
+                                <textarea id="fanfic-body" placeholder="Type or paste your fanfiction text here..." style="width: 100%; box-sizing: border-box; min-height: 200px;"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn primary" style="margin-top: 15px; width: 100%;">Publish to Fan Feed</button>
+                        </form>
+                    </div>
+
+                    <!-- 3. Live Google Sheets Stream Container -->
+                    <div class="feed-wrapper" style="margin-top: 30px;">
+                        <h3>Live Community Chronicles</h3>
+                        <!-- THIS IS WHERE YOUR SCRIPT DROPS THE LIVE SCRIPT SCROLLS -->
+                        <div id="live-fan-feed"></div> 
+                    </div>
+                </div>
+            </section>
+
             <!-- Secrets Decoder Module -->
             <section class="translator-section" id="translator">
                 <h2>Electricity Codex: Transmission Decoder</h2>
@@ -98,7 +146,9 @@
             </div>
         </div>
     </div>
-<script src="script.js"></script>
+
+    <!-- Script connection anchored at the final boundary -->
+    <script src="script.js"></script>
 
 </body>
 </html>
