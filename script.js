@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. GLOBAL CONFIGURATION & CORE SETTINGS
+   1. GLOBAL CONFIGURATION & DATA ENGINE
    ========================================================================== */
 const GOOGLE_SHEET_CONTENT_URL = "https://google.com";
 const GOOGLE_SHEET_REPORTS_URL = "https://google.com";
@@ -9,7 +9,6 @@ const profanityBlacklist = [
     'autistic', 'austism', 'cunt', 'dumbass', 'stupid', 'idiot', 'kkk', 'damn', 'daym'
 ];
 
-// Mock Database for your Lore Cards
 const loreDatabase = [
     { title: "Zephyr Faction", faction: "air", badge: "badge-air", desc: "Keepers of the whispering skies and masters of wind currents." },
     { title: "Terra Guard", faction: "earth", badge: "badge-earth", desc: "Stalwart protectors of the crystal caverns and continental roots." },
@@ -21,7 +20,7 @@ const loreDatabase = [
 ];
 
 /* ==========================================================================
-   2. ELECTRIC CODER DECODER ENGINE (THUNDER & LIGHTNING)
+   2. ELECTRIC CODER DECODER ENGINE
    ========================================================================== */
 const electricDictionary = {
     'a': '・-', 'b': '-・・・', 'c': '-・-・', 'd': '-・・', 'e': '・',
@@ -36,9 +35,7 @@ const electricDictionary = {
 
 function decodeToSkyCode(text) {
     if (!text) return "...";
-    return text.toLowerCase().split('').map(char => {
-        return electricDictionary[char] || char; 
-    }).join(' ');
+    return text.toLowerCase().split('').map(char => electricDictionary[char] || char).join(' ');
 }
 
 /* ==========================================================================
@@ -49,7 +46,6 @@ function renderLoreCards(filter = "all") {
     if (!gridContainer) return;
 
     gridContainer.innerHTML = "";
-    
     const filteredData = filter === "all" ? loreDatabase : loreDatabase.filter(item => item.faction === filter);
 
     filteredData.forEach(card => {
@@ -65,55 +61,46 @@ function renderLoreCards(filter = "all") {
 }
 
 /* ==========================================================================
-   4. CORE ARCHITECTURE INIT HUB (DOM CONTENT LOADED)
+   4. SYSTEM APPLICATION CORE INITIALIZATION
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-    // A. Run UI Builders
+    // Initialize Lore Display Grid
     renderLoreCards("all");
 
-    // B. Codex Faction Filter Event Listeners
+    // Connect Sidebar Filtration System Filters
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             filterButtons.forEach(b => b.classList.remove('active'));
             e.target.classList.add('active');
-            
             const selectedFilter = e.target.getAttribute('data-filter');
             renderLoreCards(selectedFilter);
         });
     });
 
-    // C. Electric Decoder Keyboard Event Listener
+    // Connect Active Transmitters to Electric Decoder Form UI
     const codecInput = document.getElementById('codec-input');
     const codecOutput = document.getElementById('codec-output');
     if (codecInput && codecOutput) {
         codecInput.addEventListener('input', (e) => {
             const rawText = e.target.value;
-            if (rawText.trim() === "") {
-                codecOutput.textContent = "...";
-            } else {
-                codecOutput.textContent = decodeToSkyCode(rawText);
-            }
+            codecOutput.textContent = rawText.trim() === "" ? "..." : decodeToSkyCode(rawText);
         });
     }
 
-    // D. Snippet Modal Toggles
+    // Connect Snippet Overlay Preview Window Modal
     const openBtn = document.getElementById('open-snippet-btn');
     const closeBtn = document.getElementById('close-snippet-btn');
     const modal = document.getElementById('snippet-modal');
 
     if (openBtn && modal) {
-        openBtn.addEventListener('click', () => {
-            modal.classList.add('open');
-        });
+        openBtn.addEventListener('click', () => modal.classList.add('open'));
     }
     if (closeBtn && modal) {
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('open');
-        });
+        closeBtn.addEventListener('click', () => modal.classList.remove('open'));
     }
 
-    // E. Fanfiction Content Registration Engine
+    // Connect Fanfiction Processing System Submit Events
     const submissionForm = document.getElementById('submission-form');
     if (submissionForm) {
         submissionForm.addEventListener('submit', async function(e) {
@@ -166,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // F. Kick off community stream loader
+    // Start Content Ingestion Loop
     loadFanFeed();
 });
 
@@ -181,16 +168,11 @@ function checkForSneakyCussing(inputText) {
     profanityBlacklist.forEach(word => {
         const sneakyPattern = word.split('').join('[\\s\\._\\-]*');
         const regex = new RegExp(`\\b${sneakyPattern}\\b`, 'gi');
-        if (regex.test(standardizedText)) {
-            containsBadWord = true;
-        }
+        if (regex.test(standardizedText)) containsBadWord = true;
     });
     return containsBadWord;
 }
 
-/* ==========================================================================
-   6. LIVE FETCH FEED MANAGEMENT (READS GOOGLE API DATA ROW ENTRIES)
-   ========================================================================== */
 function filterProfanity(inputText) {
     if (!inputText) return "";
     let cleanText = inputText;
@@ -201,6 +183,9 @@ function filterProfanity(inputText) {
     return cleanText;
 }
 
+/* ==========================================================================
+   6. LIVE DATABASE ARCHIVE CONSUMPTION STREAM
+   ========================================================================== */
 async function loadFanFeed() {
     const feedContainer = document.getElementById('live-fan-feed');
     if (!feedContainer) return;
@@ -209,7 +194,7 @@ async function loadFanFeed() {
 
     try {
         const response = await fetch(GOOGLE_SHEET_CONTENT_URL);
-        if (!response.ok) throw new Error("Bad status response");
+        if (!response.ok) throw new Error("Bad database connection endpoint link layout");
         
         const rawData = await response.json();
         feedContainer.innerHTML = ""; 
@@ -223,21 +208,21 @@ async function loadFanFeed() {
 
         stories.reverse().forEach((story, index) => {
             const user = story.Username || story.username || "Anonymous";
-const bio = story.userBio || story.UserBio || story.bio || "";
-const title = story.fanficTitle || story.FanficTitle || story.title || "Untitled Tale";
-const body = story.fanficBody || story.FanficBody || story.body || story.content || "";
+            const bio = story.userBio || story.UserBio || story.bio || "";
+            const title = story.fanficTitle || story.FanficTitle || story.title || "Untitled Tale";
+            const body = story.fanficBody || story.FanficBody || story.body || story.content || "";
 const time = story.Timestamp || story.timestamp || story.date || "Ancient Era";
 if (user === "Username" || user.toLowerCase() === "username") return;
 const cardHTML = <article class="fan-story-card"> <div class="card-meta"> <div> <strong class="author-name">${user}</strong>  ${bio ?"${bio}": ''} </div> <small class="story-date">${time}</small> </div> <div class="card-content"> <h3>${title}</h3> <p>${body.replace(/\n/g, '<br>')}</p> </div> <div class="card-actions"> <button type="button" class="btn-flag" onclick="flagContent('${index}', '${user.replace(/'/g, "\\'")}', '${title.replace(/'/g, "\\'")}')">⚠️ Report Violation</button> </div> </article>;
 feedContainer.insertAdjacentHTML('beforeend', cardHTML);
 });
 } catch (error) {
-feedContainer.innerHTML = "The feed is ready. Live streaming is offline during local system layout tests.";
+feedContainer.innerHTML = "The fan feed database is waiting for submissions.";
 console.error("Read error:", error);
 }
 }
 /* ==========================================================================
-7. MODERATION FLAGS ENGINE
+7. MODERATION FLAGS CONTROLLER MANAGEMENT
 ========================================================================== */
 async function flagContent(index, username, storyTitle) {
 const reason = prompt(Why are you reporting ${username}'s story "${storyTitle}"?\n(e.g., Harassment, explicit language, off-topic));
