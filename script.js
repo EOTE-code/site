@@ -1,8 +1,8 @@
 /* ==========================================================================
    1. GLOBAL CONFIGURATION & DATA ENGINE
    ========================================================================== */
-const GOOGLE_SHEET_CONTENT_URL = "https://google.com";
-const GOOGLE_SHEET_REPORTS_URL = "https://google.com";
+const GOOGLE_SHEET_CONTENT_URL = "https://docs.google.com/spreadsheets/d/1stTH24yCqqZgFw6fCFuhjV8XuJ8isx8BtkUuIR0zTIc/edit?gid=0#gid=0";
+const GOOGLE_SHEET_REPORTS_URL = "https://docs.google.com/spreadsheets/d/1stTH24yCqqZgFw6fCFuhjV8XuJ8isx8BtkUuIR0zTIc/edit?gid=667748329#gid=667748329";
 
 const profanityBlacklist = [
     'fuck', 'bitch', 'dick', 'asshole', 'ass', 'retard', 'whore', 'penis', 'shit', 
@@ -194,7 +194,7 @@ async function loadFanFeed() {
 
     try {
         const response = await fetch(GOOGLE_SHEET_CONTENT_URL);
-        if (!response.ok) throw new Error("Bad database connection endpoint link layout");
+        if (!response.ok) throw new Error("Bad database connection");
         
         const rawData = await response.json();
         feedContainer.innerHTML = ""; 
@@ -217,7 +217,7 @@ const cardHTML = <article class="fan-story-card"> <div class="card-meta"> <div> 
 feedContainer.insertAdjacentHTML('beforeend', cardHTML);
 });
 } catch (error) {
-feedContainer.innerHTML = "The fan feed database is waiting for submissions.";
+feedContainer.innerHTML = "The fan feed database is waiting for fresh entries.";
 console.error("Read error:", error);
 }
 }
