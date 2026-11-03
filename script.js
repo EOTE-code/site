@@ -1,225 +1,228 @@
-/* ========================================================================== 
-
-1. GLOBAL CONFIGURATION & CORE SETTINGS
-========================================================================== */
-const GOOGLE_SHEET_CONTENT_URL = "https://script.google.com/macros/s/AKfycbw99lO-RRbsDX-k8wHPkMrx-nxZ4BHok8_6_USv8huTeXaqQ7XcuQGJFOr2GFptRZHw/exec";
-const GOOGLE_SHEET_REPORTS_URL = "https://script.google.com/macros/s/AKfycbw99lO-RRbsDX-k8wHPkMrx-nxZ4BHok8_6_USv8huTeXaqQ7XcuQGJFOr2GFptRZHw/exec";
+/* ==========================================================================
+   1. GLOBAL CONFIGURATION & CORE SETTINGS
+   ========================================================================== */
+const GOOGLE_SHEET_CONTENT_URL = "https://google.com";
+const GOOGLE_SHEET_REPORTS_URL = "https://google.com";
 
 const profanityBlacklist = [
-'fuck', 'bitch', 'dick', 'asshole', 'ass', 'retard', 'whore', 'penis', 'shit',
-'autistic', 'austism', 'cunt', 'dumbass', 'stupid', 'idiot', 'kkk', 'damn', 'daym'
-]; 
+    'fuck', 'bitch', 'dick', 'asshole', 'ass', 'retard', 'whore', 'penis', 'shit', 
+    'autistic', 'austism', 'cunt', 'dumbass', 'stupid', 'idiot', 'kkk', 'damn', 'daym'
+];
 
-// Mock Database for your Lore Cards initialized via JavaScript
+// Mock Database for your Lore Cards
 const loreDatabase = [
-{ title: "Zephyr Faction", faction: "air", badge: "badge-air", desc: "Keepers of the whispering skies and masters of wind currents." },
-{ title: "Terra Guard", faction: "earth", badge: "badge-earth", desc: "Stalwart protectors of the crystal caverns and continental roots." },
-{ title: "Volt Spark", faction: "electricity", badge: "badge-electricity", desc: "Wielders of the high-frequency thunder codes and lightning signals." },
-{ title: "Ignis Brood", faction: "fire", badge: "badge-fire", desc: "Born from the ash of volcanic spires, carrying the eternal spark." },
-{ title: "Glacial Order", faction: "ice", badge: "badge-ice", desc: "Preservers of ancient frost memories trapped deep in frozen depths." },
-{ title: "The Etherborn", faction: "magic", badge: "badge-magic", desc: "Scholars who tap directly into raw elemental source matrices." },
-{ title: "Tide Walkers", faction: "water", badge: "badge-water", desc: "Navigators of deep abyssal trenches and changing ocean balances." }
-]; 
+    { title: "Zephyr Faction", faction: "air", badge: "badge-air", desc: "Keepers of the whispering skies and masters of wind currents." },
+    { title: "Terra Guard", faction: "earth", badge: "badge-earth", desc: "Stalwart protectors of the crystal caverns and continental roots." },
+    { title: "Volt Spark", faction: "electricity", badge: "badge-electricity", desc: "Wielders of the high-frequency thunder codes and lightning signals." },
+    { title: "Ignis Brood", faction: "fire", badge: "badge-fire", desc: "Born from the ash of volcanic spires, carrying the eternal spark." },
+    { title: "Glacial Order", faction: "ice", badge: "badge-ice", desc: "Preservers of ancient frost memories trapped deep in frozen depths." },
+    { title: "The Etherborn", faction: "magic", badge: "badge-magic", desc: "Scholars who tap directly into raw elemental source matrices." },
+    { title: "Tide Walkers", faction: "water", badge: "badge-water", desc: "Navigators of deep abyssal trenches and changing ocean balances." }
+];
 
 /* ==========================================================================
-2. ELECTRIC CODER DECODER ENGINE (THUNDER & LIGHTNING)
-========================================================================== */
+   2. ELECTRIC CODER DECODER ENGINE (THUNDER & LIGHTNING)
+   ========================================================================== */
 const electricDictionary = {
-'a': '・-', 'b': '-・・・', 'c': '-・-・', 'd': '-・・', 'e': '・',
-'f': '・・-・', 'g': '--・', 'h': '・・・・', 'i': '・・', 'j': '・---',
-'k': '-・-', 'l': '・-・・', 'm': '--', 'n': '-・', 'o': '---',
-'p': '・--・', 'q': '--・-', 'r': '・-・', 's': '・・・', 't': '-',
-'u': '・・-', 'v': '・・・-', 'w': '・--', 'x': '-・・-', 'y': '-・--',
-'z': '--・・', '1': '・----', '2': '・・---', '3': '・・・--', '4': '・・・・-',
-'5': '・・・・・', '6': '-・・・・', '7': '--・・・', '8': '---・・', '9': '----・',
-'0': '-----', ' ': ' / '
-}; 
+    'a': '・-', 'b': '-・・・', 'c': '-・-・', 'd': '-・・', 'e': '・',
+    'f': '・・-・', 'g': '--・', 'h': '・・・・', 'i': '・・', 'j': '・---',
+    'k': '-・-', 'l': '・-・・', 'm': '--', 'n': '-・', 'o': '---',
+    'p': '・--・', 'q': '--・-', 'r': '・-・', 's': '・・・', 't': '-',
+    'u': '・・-', 'v': '・・・-', 'w': '・--', 'x': '-・・-', 'y': '-・--',
+    'z': '--・・', '1': '・----', '2': '・・---', '3': '・・・--', '4': '・・・・-',
+    '5': '・・・・・', '6': '-・・・・', '7': '--・・・', '8': '---・・', '9': '----・',
+    '0': '-----', ' ': ' / '
+};
 
 function decodeToSkyCode(text) {
-return text.toLowerCase().split('').map(char => {
-return electricDictionary[char] || char;
-}).join(' ');
-} 
+    if (!text) return "...";
+    return text.toLowerCase().split('').map(char => {
+        return electricDictionary[char] || char; 
+    }).join(' ');
+}
 
 /* ==========================================================================
-3. INTERACTIVE LORE CARDS & CODEX FILTERS
-========================================================================== */
+   3. INTERACTIVE LORE CARDS RENDERING ENGINE
+   ========================================================================== */
 function renderLoreCards(filter = "all") {
-const gridContainer = document.getElementById('elements-grid');
-if (!gridContainer) return; 
+    const gridContainer = document.getElementById('elements-grid');
+    if (!gridContainer) return;
 
-gridContainer.innerHTML = "";
+    gridContainer.innerHTML = "";
+    
+    const filteredData = filter === "all" ? loreDatabase : loreDatabase.filter(item => item.faction === filter);
 
-const filteredData = filter === "all" ? loreDatabase : loreDatabase.filter(item => item.faction === filter);
-
-filteredData.forEach(card => {
-const cardHTML = `
-`;
-gridContainer.insertAdjacentHTML('beforeend', cardHTML);
-
-});
-
-} 
+    filteredData.forEach(card => {
+        const cardHTML = `
+            <div class="lore-card" data-faction="${card.faction}">
+                <span class="element-badge ${card.badge}">${card.faction.toUpperCase()}</span>
+                <h3>${card.title}</h3>
+                <p>${card.desc}</p>
+            </div>
+        `;
+        gridContainer.insertAdjacentHTML('beforeend', cardHTML);
+    });
+}
 
 /* ==========================================================================
-4. INITIALIZATION ENGINE (DOM CONTENT LOADED)
-========================================================================== */
+   4. CORE ARCHITECTURE INIT HUB (DOM CONTENT LOADED)
+   ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-// A. Render Initial Lore Cards
-renderLoreCards("all"); 
+    // A. Run UI Builders
+    renderLoreCards("all");
 
-// B. Hook Up Codex Filter Buttons
-const filterButtons = document.querySelectorAll('.filter-btn');
-filterButtons.forEach(btn => {
-btn.addEventListener('click', (e) => {
-filterButtons.forEach(b => b.classList.remove('active'));
-e.target.classList.add('active');
-    const selectedFilter = e.target.getAttribute('data-filter');
-    renderLoreCards(selectedFilter);
-});
+    // B. Codex Faction Filter Event Listeners
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            
+            const selectedFilter = e.target.getAttribute('data-filter');
+            renderLoreCards(selectedFilter);
+        });
+    });
 
-});
-
-// C. Hook Up Electric Decoder Input Listener
-const codecInput = document.getElementById('codec-input');
-const codecOutput = document.getElementById('codec-output');
-if (codecInput && codecOutput) {
-codecInput.addEventListener('input', (e) => {
-const rawText = e.target.value;
-if (rawText.trim() === "") {
-codecOutput.textContent = "...";
-} else {
-codecOutput.textContent = decodeToSkyCode(rawText);
-}
-});
-}
-
-// D. Hook Up Snippet Modal Toggle Mechanics
-const openBtn = document.getElementById('open-snippet-btn');
-const closeBtn = document.getElementById('close-snippet-btn');
-const modal = document.getElementById('snippet-modal');
-
-if (openBtn && modal) {
-openBtn.addEventListener('click', () => {
-modal.classList.add('open');
-});
-}
-if (closeBtn && modal) {
-closeBtn.addEventListener('click', () => {
-modal.classList.remove('open');
-});
-}
-
-// E. Hook Up Fanfiction Form Submission
-const submissionForm = document.getElementById('submission-form');
-if (submissionForm) {
-submissionForm.addEventListener('submit', async function(e) {
-e.preventDefault();
-    const rawUsername = document.getElementById('fan-username')?.value || "AnonymousFan";
-    const rawBio = document.getElementById('fan-bio')?.value || "";
-    const rawTitle = document.getElementById('content-title')?.value || "";
-    const rawBody = document.getElementById('fanfic-body')?.value || "";
-
-    if (!rawTitle.trim() || !rawBody.trim()) {
-        alert("Please fill out both the story title and the body chronicle before submitting.");
-        return;
+    // C. Electric Decoder Keyboard Event Listener
+    const codecInput = document.getElementById('codec-input');
+    const codecOutput = document.getElementById('codec-output');
+    if (codecInput && codecOutput) {
+        codecInput.addEventListener('input', (e) => {
+            const rawText = e.target.value;
+            if (rawText.trim() === "") {
+                codecOutput.textContent = "...";
+            } else {
+                codecOutput.textContent = decodeToSkyCode(rawText);
+            }
+        });
     }
 
-    if (checkForSneakyCussing(rawTitle) || checkForSneakyCussing(rawBody) || checkForSneakyCussing(rawUsername)) {
-        alert("Submission Blocked: Your text contains words or layouts that violate safety guidelines. Please keep content family-friendly.");
-        return; 
+    // D. Snippet Modal Toggles
+    const openBtn = document.getElementById('open-snippet-btn');
+    const closeBtn = document.getElementById('close-snippet-btn');
+    const modal = document.getElementById('snippet-modal');
+
+    if (openBtn && modal) {
+        openBtn.addEventListener('click', () => {
+            modal.classList.add('open');
+        });
+    }
+    if (closeBtn && modal) {
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('open');
+        });
     }
 
-    const cleanUsername = filterProfanity(rawUsername);
-    const cleanBio = filterProfanity(rawBio);
-    const cleanTitle = filterProfanity(rawTitle);
-    const cleanBody = filterProfanity(rawBody);
+    // E. Fanfiction Content Registration Engine
+    const submissionForm = document.getElementById('submission-form');
+    if (submissionForm) {
+        submissionForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const rawUsername = document.getElementById('fan-username')?.value || "AnonymousFan";
+            const rawBio = document.getElementById('fan-bio')?.value || "";
+            const rawTitle = document.getElementById('content-title')?.value || "";
+            const rawBody = document.getElementById('fanfic-body')?.value || "";
 
-    const payload = {
-        "Timestamp": new Date().toLocaleString(),
-        "Username": cleanUsername,
-        "userBio": cleanBio,
-        "fanficTitle": cleanTitle,
-        "fanficBody": cleanBody
-    };
+            if (!rawTitle.trim() || !rawBody.trim()) {
+                alert("Please fill out both the story title and the body chronicle before submitting.");
+                return;
+            }
+
+            if (checkForSneakyCussing(rawTitle) || checkForSneakyCussing(rawBody) || checkForSneakyCussing(rawUsername)) {
+                alert("Submission Blocked: Content guidelines violation detected.");
+                return; 
+            }
+
+            const cleanUsername = filterProfanity(rawUsername);
+            const cleanBio = filterProfanity(rawBio);
+            const cleanTitle = filterProfanity(rawTitle);
+            const cleanBody = filterProfanity(rawBody);
+
+            const payload = {
+                "Timestamp": new Date().toLocaleString(),
+                "Username": cleanUsername,
+                "userBio": cleanBio,
+                "fanficTitle": cleanTitle,
+                "fanficBody": cleanBody
+            };
+
+            try {
+                await fetch(GOOGLE_SHEET_CONTENT_URL, {
+                    method: "POST",
+                    mode: "no-cors", 
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(payload).toString()
+                });
+
+                alert("Success! Your story has been recorded in the archives.");
+                submissionForm.reset();
+                setTimeout(loadFanFeed, 1000); 
+                
+            } catch (error) {
+                console.error("Network Error:", error);
+                alert("Failed to communicate with your database server.");
+            }
+        });
+    }
+
+    // F. Kick off community stream loader
+    loadFanFeed();
+});
+
+/* ==========================================================================
+   5. SECURITY & FILTER UTILITIES
+   ========================================================================== */
+function checkForSneakyCussing(inputText) {
+    if (!inputText) return false;
+    let standardizedText = inputText.toLowerCase();
+    let containsBadWord = false;
+
+    profanityBlacklist.forEach(word => {
+        const sneakyPattern = word.split('').join('[\\s\\._\\-]*');
+        const regex = new RegExp(`\\b${sneakyPattern}\\b`, 'gi');
+        if (regex.test(standardizedText)) {
+            containsBadWord = true;
+        }
+    });
+    return containsBadWord;
+}
+
+/* ==========================================================================
+   6. LIVE FETCH FEED MANAGEMENT (READS GOOGLE API DATA ROW ENTRIES)
+   ========================================================================== */
+function filterProfanity(inputText) {
+    if (!inputText) return "";
+    let cleanText = inputText;
+    profanityBlacklist.forEach(word => {
+        const regex = new RegExp(`\\b${word}\\b`, 'gi');
+        cleanText = cleanText.replace(regex, '-'.repeat(word.length));
+    });
+    return cleanText;
+}
+
+async function loadFanFeed() {
+    const feedContainer = document.getElementById('live-fan-feed');
+    if (!feedContainer) return;
+    
+    feedContainer.innerHTML = "<p class='loading-text'>Unrolling parchment scrolls...</p>";
 
     try {
-        await fetch(GOOGLE_SHEET_CONTENT_URL, {
-            method: "POST",
-            mode: "no-cors", 
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(payload).toString()
-        });
-
-        alert("Success! Your story has been recorded in the archives.");
-        submissionForm.reset();
+        const response = await fetch(GOOGLE_SHEET_CONTENT_URL);
+        if (!response.ok) throw new Error("Bad status response");
         
-        setTimeout(loadFanFeed, 1000); 
-        
-    } catch (error) {
-        console.error("Network Error:", error);
-        alert("Failed to communicate with your database server.");
-    }
-});
+        const rawData = await response.json();
+        feedContainer.innerHTML = ""; 
 
-}
+        if (!rawData || (Array.isArray(rawData) && rawData.length === 0)) {
+            feedContainer.innerHTML = "<p style='font-style: italic; opacity: 0.6; padding: 20px;'>The archives are empty. Be the first to compose a chronicle!</p>";
+            return;
+        }
 
-// F. Fetch Initial Fan Feed Stream Data
-loadFanFeed();
+        let stories = Array.isArray(rawData) ? rawData : (rawData.data || rawData.stories || []);
 
-}); 
-
-/* ==========================================================================
-5. SECURITY & FILTER UTILITIES
-========================================================================== */
-function checkForSneakyCussing(inputText) {
-if (!inputText) return false;
-let standardizedText = inputText.toLowerCase();
-let containsBadWord = false; 
-
-profanityBlacklist.forEach(word => {
-const sneakyPattern = word.split('').join('[\s\._\-]*');
-const regex = new RegExp(\\b${sneakyPattern}\\b, 'gi');
-if (regex.test(standardizedText)) {
-containsBadWord = true;
-}
-});
-return containsBadWord;
-} 
-
-function filterProfanity(inputText) {
-if (!inputText) return "";
-let cleanText = inputText;
-profanityBlacklist.forEach(word => {
-const regex = new RegExp(\\b${word}\\b, 'gi');
-cleanText = cleanText.replace(regex, '-'.repeat(word.length));
-});
-return cleanText;
-} 
-
-/* ==========================================================================
-6. LIVE FETCH FEED (READ FROM GOOGLE SHEETS LIVE MATRIX)
-========================================================================== */
-async function loadFanFeed() {
-const feedContainer = document.getElementById('live-fan-feed');
-if (!feedContainer) return; 
-
-feedContainer.innerHTML = "<p class='loading-text'>Unrolling parchment scrolls...</p>";
-
-try {
-const response = await fetch(GOOGLE_SHEET_CONTENT_URL);
-if (!response.ok) throw new Error("Bad status");
-const rawData = await response.json();
-feedContainer.innerHTML = ""; 
-
-if (!rawData || (Array.isArray(rawData) && rawData.length === 0)) {
-    feedContainer.innerHTML = "<p style='font-style: italic; opacity: 0.6; padding: 20px;'>The archives are empty. Be the first to compose a chronicle!</p>";
-    return;
-}
-
-let stories = Array.isArray(rawData) ? rawData : (rawData.data || rawData.stories || []);
-
-stories.reverse().forEach((story, index) => {const user = story.Username || story.username || "Anonymous";
+        stories.reverse().forEach((story, index) => {
+            const user = story.Username || story.username || "Anonymous";
 const bio = story.userBio || story.UserBio || story.bio || "";
 const title = story.fanficTitle || story.FanficTitle || story.title || "Untitled Tale";
 const body = story.fanficBody || story.FanficBody || story.body || story.content || "";
@@ -229,12 +232,12 @@ const cardHTML = <article class="fan-story-card"> <div class="card-meta"> <div> 
 feedContainer.insertAdjacentHTML('beforeend', cardHTML);
 });
 } catch (error) {
-feedContainer.innerHTML = "The fan feed is currently offline. Local files cannot read a Google web app URL without setup, but your UI elements are safe.";
+feedContainer.innerHTML = "The feed is ready. Live streaming is offline during local system layout tests.";
 console.error("Read error:", error);
 }
 }
 /* ==========================================================================
-7. MODERATION CONSOLE ALERTS
+7. MODERATION FLAGS ENGINE
 ========================================================================== */
 async function flagContent(index, username, storyTitle) {
 const reason = prompt(Why are you reporting ${username}'s story "${storyTitle}"?\n(e.g., Harassment, explicit language, off-topic));
